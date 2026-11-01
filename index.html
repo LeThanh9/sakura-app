@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sakura Cloud - Nền Tảng Tải & Chia Sẻ Ứng Dụng</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=M+PLUS+Rounded+1c:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Shippori+Mincho:wght@600;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(145deg, #fff2f6 0%, #fedde6 40%, #fbcfe8 75%, #f9a8d4 100%);
+      --sakura-crimson: #d90448;
+      --sakura-pink-deep: #ff3366;
+      --sakura-pink: #ff6584;
+      --sakura-pink-soft: #ffa3b8;
+      --wood-dark: #220b12;
+      --wood-mid: #3a1420;
+      --wood-light: #572232;
+      --glass-bg: rgba(255, 255, 255, 0.88);
+      --glass-bg-hover: rgba(255, 255, 255, 0.96);
+      --glass-border: rgba(255, 255, 255, 0.95);
+      --glass-shadow: 0 16px 40px rgba(220, 60, 110, 0.14);
+      --text-main: #2b111c;
+      --text-muted: #6e3c4e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fullscreen Falling Petals Canvas */
+    #sakura-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 25;
+    }
+
+    /* Ambient Sun Glow in corner (Delicate & not blinding) */
+    .ambient-sun {
+      position: fixed;
+      top: -60px;
+      right: 5%;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(255, 215, 225, 0.45) 40%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(25px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Distant Mountain Line */
+    .fuji-backdrop {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 320px;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.35;
+    }
+
+    /* =================================================================
+       THE DETAILED SAKURA BONSAI TREE (TỶ LỆ CHUẨN, KHÔNG BỊ QUÁ BỰ)
+       ================================================================= */
+    .tree-backdrop {
+      position: fixed;
+      bottom: -10px;
+      left: 0;
+      width: 440px;
+      height: 680px;
+      pointer-events: none;
+      z-index: 5;
+      transition: all 0.35s ease;
+      filter: drop-shadow(0 15px 30px rgba(130, 20, 50, 0.18));
+    }
+
+    @media (max-width: 1200px) {
+      .tree-backdrop {
+        width: 360px;
+        height: 560px;
+        opacity: 0.85;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .tree-backdrop {
+        width: 280px;
+        height: 440px;
+        opacity: 0.45;
+      }
+    }
+
+    /* Natural Wind Breathing Sway */
+    .breeze-limb {
+      transform-origin: 160px 420px;
+      animation: treeBreeze 7s ease-in-out infinite alternate;
+    }
+
+    @keyframes treeBreeze {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(1.8deg); }
+    }
+
+    /* Hanging Japanese Chōchin (Lantern) */
+    .lantern-chōchin {
+      transform-origin: 235px 285px;
+      animation: lanternPhysics 4s ease-in-out infinite alternate;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+
+    @keyframes lanternPhysics {
+      0% { transform: rotate(4deg); }
+      100% { transform: rotate(-5deg); }
+    }
+
+    /* =================================================================
+       MAIN APP CONTAINER & CLEAN GLASS CARDS
+       ================================================================= */
+    .app-wrapper {
+      position: relative;
+      z-index: 30;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px 20px 80px;
+    }
+
+    /* Top Navigation */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 26px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 50px;
+      border: 1.5px solid var(--glass-border);
+      box-shadow: 0 10px 30px rgba(220, 60, 110, 0.1);
+      margin-bottom: 35px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-icon-box {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #ff3366, #ff758c);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.35rem;
+      box-shadow: 0 6px 16px rgba(255, 51, 102, 0.35);
+      animation: spinFlower 16s linear infinite;
+    }
+
+    @keyframes spinFlower {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .brand-titles h2 {
+      font-family: 'Comfortaa', cursive;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-titles span.jp-sub {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 0.72rem;
+      color: var(--sakura-crimson);
+      font-weight: 700;
+      letter-spacing: 2px;
+      display: block;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .action-btn {
+      background: white;
+      border: 1.2px solid #ffc2d1;
+      color: var(--sakura-crimson);
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(255, 60, 110, 0.08);
+      transition: all 0.25s ease;
+    }
+
+    .action-btn:hover {
+      background: var(--sakura-crimson);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(217, 4, 72, 0.3);
+      border-color: var(--sakura-crimson);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1.2px solid #ffccd8;
+      padding: 6px 20px;
+      border-radius: 40px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--sakura-crimson);
+      box-shadow: 0 4px 15px rgba(220, 60, 110, 0.12);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'Comfortaa', cursive;
+      font-size: 2.9rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 .highlight-text {
+      background: linear-gradient(45deg, #c9003e, #ff2a6d, #ff758c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Content Grid Layout */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (max-width: 880px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 {
+        font-size: 2.1rem;
+      }
+    }
+
+    /* Glass Cards */
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-radius: 26px;
+      border: 1.5px solid var(--glass-border);
+      padding: 30px;
+      box-shadow: var(--glass-shadow);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .glass-card:hover {
+      box-shadow: 0 22px 48px rgba(220, 60, 110, 0.22);
+      transform: translateY(-3px);
+      background: var(--glass-bg-hover);
+    }
+
+    .card-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .card-title {
+      font-family: 'Comfortaa', cursive;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card-title .icon-circle {
+      width: 40px;
+      height: 40px;
+      background: #ffe3ec;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sakura-pink-deep);
+      font-size: 1.15rem;
+    }
+
+    .card-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--sakura-crimson);
+      background: rgba(255, 51, 102, 0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* Upload Drag & Drop Zone */
+    .upload-zone {
+      border: 2px dashed #ff9bb2;
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 20px;
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .upload-zone:hover, .upload-zone.dragover {
+      background: white;
+      border-color: var(--sakura-crimson);
+      transform: scale(1.01);
+      box-shadow: 0 10px 24px rgba(255, 51, 102, 0.15);
+    }
+
+    .upload-art-icon {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 14px;
+      background: linear-gradient(135deg, #ffe0e9 0%, #ffd0dc 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sakura-crimson);
+      font-size: 2rem;
+      box-shadow: 0 8px 22px rgba(255, 51, 102, 0.22);
+    }
+
+    .upload-zone h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .upload-zone p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .supported-badges {
+      margin-top: 14px;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .mini-pill {
+      background: white;
+      color: #9c4b63;
+      padding: 3px 10px;
+      border-radius: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      border: 1px solid #ffd0dc;
+    }
+
+    .file-input-hidden {
+      display: none;
+    }
+
+    /* Selected File Preview Box */
+    .selected-preview {
+      display: none;
+      background: white;
+      border-radius: 16px;
+      padding: 14px 18px;
+      align-items: center;
+      justify-content: space-between;
+      border: 1.5px solid #ffb8ca;
+      box-shadow: 0 6px 20px rgba(255, 51, 102, 0.1);
+      margin-top: 18px;
+    }
+
+    .selected-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .file-type-icon {
+      width: 44px;
+      height: 44px;
+      background: #ffe6ee;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--sakura-crimson);
+      font-size: 1.4rem;
+    }
+
+    .selected-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      max-width: 230px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .selected-size {
+      font-size: 0.78rem;
+      color: #92586c;
+      font-weight: 500;
+    }
+
+    .btn-clear-file {
+      background: #fff0f3;
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      color: #ff3366;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    .btn-clear-file:hover {
+      background: #ff3366;
+      color: white;
+    }
+
+    /* Main Button */
+    .btn-sakura-main {
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px 26px;
+      background: linear-gradient(135deg, #d90448 0%, #ff3366 50%, #ff6584 100%);
+      color: white;
+      border: none;
+      border-radius: 16px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 26px rgba(217, 4, 72, 0.38);
+      transition: all 0.25s ease;
+    }
+
+    .btn-sakura-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(217, 4, 72, 0.48);
+      background: linear-gradient(135deg, #b80036 0%, #d90448 60%, #ff4d79 100%);
+    }
+
+    /* App Repository List */
+    .app-cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .app-card-item {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 18px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 16px rgba(220, 60, 110, 0.06);
+      transition: all 0.25s ease;
+    }
+
+    .app-card-item:hover {
+      background: white;
+      border-color: #ffccd8;
+      transform: translateX(4px);
+      box-shadow: 0 8px 24px rgba(217, 4, 72, 0.15);
+    }
+
+    .app-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .app-platform-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.45rem;
+      color: white;
+    }
+    .badge-android { background: linear-gradient(135deg, #2ecc71, #16a085); }
+    .badge-windows { background: linear-gradient(135deg, #00b4db, #0083b0); }
+    .badge-zip     { background: linear-gradient(135deg, #ff9966, #ff5e62); }
+    .badge-apple   { background: linear-gradient(135deg, #3a3a3a, #1a1a1a); }
+
+    .app-details h5 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 3px;
+    }
+
+    .app-specs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .tag-category {
+      background: #ffe3ec;
+      color: var(--sakura-crimson);
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+    }
+
+    .btn-download-app {
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 51, 102, 0.1);
+      border: none;
+      border-radius: 12px;
+      color: var(--sakura-crimson);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-download-app:hover {
+      background: var(--sakura-crimson);
+      color: white;
+      transform: scale(1.1);
+      box-shadow: 0 5px 16px rgba(217, 4, 72, 0.35);
+    }
+
+    /* Toast Notification */
+    .toast-box {
+      position: fixed;
+      bottom: 26px;
+      right: 26px;
+      background: white;
+      border-left: 5px solid var(--sakura-crimson);
+      padding: 15px 22px;
+      border-radius: 14px;
+      box-shadow: 0 10px 32px rgba(0,0,0,0.12);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transform: translateY(120px);
+      opacity: 0;
+      transition: all 0.35s ease;
+      pointer-events: none;
+    }
+
+    .toast-box.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 55px;
+      color: #8c5164;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Falling Petals Canvas -->
+  <canvas id="sakura-canvas"></canvas>
+
+  <!-- Ambient Light -->
+  <div class="ambient-sun"></div>
+
+  <!-- Mt Fuji Silhouette -->
+  <svg class="fuji-backdrop" viewBox="0 0 1440 320" fill="none" preserveAspectRatio="none">
+    <path fill="rgba(255, 182, 193, 0.28)" d="M0,224L80,213.3C160,203,320,181,480,186.7C640,192,800,224,960,218.7C1120,213,1280,171,1360,149.3L1440,128L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+    <path fill="rgba(255, 140, 170, 0.18)" d="M0,288L60,277.3C120,267,240,245,360,245.3C480,245,600,267,720,261.3C840,256,960,224,1080,213.3C1200,203,1320,213,1380,218.7L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+  </svg>
+
+  <!-- =================================================================
+       THE DETAILED SAKURA TREE (CÂY HOA ANH ĐÀO TỶ LỆ HÀI HÒA, CỰC CHI TIẾT)
+       ================================================================= -->
+  <div class="tree-backdrop" id="tree-container">
+    <svg viewBox="0 0 440 680" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Bark Gradients -->
+        <linearGradient id="barkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1c070e"/>
+          <stop offset="35%" stop-color="#36121d"/>
+          <stop offset="70%" stop-color="#4f1b2b"/>
+          <stop offset="100%" stop-color="#240a13"/>
+        </linearGradient>
+
+        <linearGradient id="branchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#2b0d17"/>
+          <stop offset="60%" stop-color="#481a28"/>
+          <stop offset="100%" stop-color="#612437"/>
+        </linearGradient>
+
+        <!-- Delicate Petal Gradients -->
+        <radialGradient id="petalPink" cx="35%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="45%" stop-color="#ffdeea"/>
+          <stop offset="80%" stop-color="#ff7b9b"/>
+          <stop offset="100%" stop-color="#d90448"/>
+        </radialGradient>
+
+        <radialGradient id="blossomPuff" cx="40%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="40%" stop-color="#ffccd8"/>
+          <stop offset="80%" stop-color="#ff6b8e"/>
+          <stop offset="100%" stop-color="#b80c39"/>
+        </radialGradient>
+
+        <!-- MASTER 5-PETAL BOTANICAL FLOWER (KÍCH THƯỚC CHUẨN 26px CÓ NHỤY VÀNG) -->
+        <g id="flower-symbol">
+          <!-- 5 Heart Notched Petals -->
+          <path d="M 0,-2 C -4,-8 -8,-15 -2,-20 C 0,-22 2,-21 0,-18 C -1,-21 1,-22 4,-20 C 8,-15 4,-8 0,-2 Z" fill="url(#petalPink)"/>
+          <path d="M 2,-1 C 9,-4 16,-6 19,-1 C 21,1 20,3 17,2 C 20,3 20,5 17,7 C 11,9 6,4 2,-1 Z" fill="url(#petalPink)"/>
+          <path d="M 1,2 C 7,7 12,14 9,19 C 7,22 5,20 5,18 C 4,21 3,21 0,19 C -4,15 -1,8 1,2 Z" fill="url(#petalPink)"/>
+          <path d="M -1,2 C -7,7 -12,14 -9,19 C -7,22 -5,20 -5,18 C -4,21 -3,21 0,19 C 4,15 1,8 -1,2 Z" fill="url(#petalPink)"/>
+          <path d="M -2,-1 C -9,-4 -16,-6 -19,-1 C -21,1 -20,3 -17,2 C -20,3 -20,5 -17,7 C -11,9 -6,4 -2,-1 Z" fill="url(#petalPink)"/>
+          
+          <!-- Deep Crimson Center -->
+          <circle cx="0" cy="0" r="4" fill="#a8002a"/>
+          
+          <!-- Golden Anthers Stamens (Nhụy vàng) -->
+          <circle cx="0" cy="-7" r="1.1" fill="#ffe066"/>
+          <circle cx="6" cy="-4" r="1.1" fill="#ffe066"/>
+          <circle cx="5" cy="5" r="1.1" fill="#ffe066"/>
+          <circle cx="-5" cy="5" r="1.1" fill="#ffe066"/>
+          <circle cx="-6" cy="-4" r="1.1" fill="#ffe066"/>
+        </g>
+
+        <!-- SAKURA BUD (NỤ HOA) -->
+        <g id="bud-symbol">
+          <path d="M 0,0 C -2,-4 -3,-8 -1,-11 C 0,-13 2,-13 3,-10 C 4,-7 2,-4 0,0 Z" fill="#ff4071"/>
+          <path d="M -3,0 C -3,2 -2,4 0,5 C 2,4 3,2 3,0 Z" fill="#4d5f30"/>
+        </g>
+      </defs>
+
+      <!-- Moss Base & Roots -->
+      <g id="roots">
+        <path d="M 10,680 C 60,650 140,655 220,680 Z" fill="#2d131b"/>
+        <path d="M 30,680 C 80,660 130,660 190,680 Z" fill="#4e5b34" opacity="0.6"/>
+        <!-- Root curves -->
+        <path d="M 50,680 C 65,655 75,630 85,595 L 98,602 C 88,640 75,662 65,680 Z" fill="url(#barkGrad)"/>
+        <path d="M 155,680 C 145,650 135,620 128,580 L 140,576 C 150,615 160,645 175,680 Z" fill="url(#barkGrad)"/>
+        <!-- Fallen petals -->
+        <circle cx="45" cy="672" r="4" fill="#ff758c"/>
+        <circle cx="70" cy="675" r="5" fill="#ffa3b8"/>
+        <circle cx="110" cy="670" r="4" fill="#fff"/>
+        <circle cx="150" cy="674" r="4.5" fill="#ff4d79"/>
+      </g>
+
+      <!-- Ancient Gnarled Trunk (Thân cây thanh thoát) -->
+      <g id="trunk">
+        <path d="M 70,680 C 85,620 95,570 105,510 C 115,450 125,395 140,340 C 150,300 168,260 190,220 L 215,232 C 195,270 180,310 170,355 C 160,405 150,465 145,525 C 140,580 150,630 165,680 Z"
+              fill="url(#barkGrad)"/>
+        <!-- Fine Bark Striations -->
+        <path d="M 85,640 Q 100,560 112,480 Q 125,410 145,340" stroke="#16050b" stroke-width="2.5" fill="none" opacity="0.7"/>
+        <path d="M 105,650 Q 120,570 130,500 Q 142,430 162,370" stroke="#521e2e" stroke-width="2" fill="none" opacity="0.7"/>
+        <!-- Wood knot -->
+        <ellipse cx="132" cy="460" rx="6" ry="11" fill="#1b080f"/>
+      </g>
+
+      <!-- Canopy & Branches -->
+      <g id="branches" class="breeze-limb">
+        <!-- Branch 1: Leftward Weeping Branch -->
+        <path d="M 115,480 C 85,460 55,465 25,485 C 5,500 -10,520 -25,535 L -28,525 C -12,508 2,490 22,475 C 55,452 88,450 125,465 Z" fill="url(#branchGrad)"/>
+        <path d="M 50,470 C 35,435 15,415 -5,405 L -3,398 C 17,408 38,428 54,462 Z" fill="url(#branchGrad)"/>
+
+        <!-- Branch 2: Center Arching Canopy -->
+        <path d="M 165,310 C 195,260 235,230 280,215 C 325,200 375,205 415,220 L 410,230 C 372,216 325,212 282,226 C 240,240 202,268 175,315 Z" fill="url(#branchGrad)"/>
+        <!-- Sub-branch 1 -->
+        <path d="M 240,230 C 265,185 300,145 345,115 L 350,122 C 308,150 275,188 250,232 Z" fill="url(#branchGrad)"/>
+        <!-- Sub-branch 2 -->
+        <path d="M 190,220 C 160,175 125,135 80,105 L 85,98 C 130,128 168,168 198,215 Z" fill="url(#branchGrad)"/>
+
+        <!-- Traditional Japanese Hanging Lantern -->
+        <g class="lantern-chōchin" onclick="ringChime(); triggerBlossomBurst();" title="Nhấp vào lồng đèn để thổi bùng hoa">
+          <line x1="235" y1="230" x2="235" y2="270" stroke="#1f0910" stroke-width="1.8"/>
+          <!-- Cap -->
+          <rect x="224" y="270" width="22" height="4" rx="1.5" fill="#1b080f"/>
+          <!-- Body -->
+          <ellipse cx="235" cy="295" rx="15" ry="20" fill="#e60039"/>
+          <ellipse cx="235" cy="295" rx="10" ry="14" fill="#ff4d79"/>
+          <ellipse cx="235" cy="295" rx="6" ry="9" fill="#ffe082"/>
+          <!-- Ribs -->
+          <path d="M 223,288 Q 235,291 247,288" stroke="#7a001e" stroke-width="1" fill="none"/>
+          <path d="M 222,298 Q 235,301 248,298" stroke="#7a001e" stroke-width="1" fill="none"/>
+          <!-- Kanji '桜' -->
+          <text x="235" y="300" font-family="'Shippori Mincho', serif" font-size="9" font-weight="900" fill="#4d0012" text-anchor="middle">桜</text>
+          <!-- Bottom & Tassel -->
+          <rect x="227" y="315" width="16" height="3" fill="#1b080f"/>
+          <line x1="235" y1="318" x2="235" y2="335" stroke="#d90448" stroke-width="2"/>
+        </g>
+      </g>
+
+      <!-- Soft Blossom Underlay Clouds (Tạo độ bồng bềnh vừa phải) -->
+      <g id="blossom-clouds" opacity="0.88">
+        <ellipse cx="25" cy="480" rx="55" ry="40" fill="url(#blossomPuff)"/>
+        <ellipse cx="80" cy="110" rx="65" ry="50" fill="url(#blossomPuff)"/>
+        <ellipse cx="200" cy="140" rx="75" ry="55" fill="url(#blossomPuff)"/>
+        <ellipse cx="320" cy="120" rx="80" ry="60" fill="url(#blossomPuff)"/>
+        <ellipse cx="380" cy="180" rx="65" ry="50" fill="url(#blossomPuff)"/>
+      </g>
+
+      <!-- Master Blossom Flowers (Sắp xếp chính xác bằng translate) -->
+      <g id="blossom-flowers">
+        <!-- Left Weeping Branch -->
+        <use href="#flower-symbol" transform="translate(45, 465) rotate(15) scale(0.95)"/>
+        <use href="#flower-symbol" transform="translate(15, 485) rotate(-25) scale(1.05)"/>
+        <use href="#flower-symbol" transform="translate(-10, 515) rotate(35) scale(0.85)"/>
+        <use href="#flower-symbol" transform="translate(60, 440) rotate(50) scale(0.9)"/>
+        <use href="#bud-symbol" transform="translate(-20, 535) rotate(-15) scale(1)"/>
+        <use href="#bud-symbol" transform="translate(30, 430) rotate(40) scale(1.1)"/>
+
+        <!-- Top-Left Branch -->
+        <use href="#flower-symbol" transform="translate(65, 115) rotate(-20) scale(1.1)"/>
+        <use href="#flower-symbol" transform="translate(100, 95) rotate(30) scale(1)"/>
+        <use href="#flower-symbol" transform="translate(130, 130) rotate(-45) scale(0.95)"/>
+        <use href="#flower-symbol" transform="translate(90, 145) rotate(15) scale(1.15)"/>
+        <use href="#bud-symbol" transform="translate(45, 100) rotate(-35) scale(1)"/>
+
+        <!-- Center Canopy -->
+        <use href="#flower-symbol" transform="translate(180, 155) rotate(10) scale(1.2)"/>
+        <use href="#flower-symbol" transform="translate(225, 125) rotate(-30) scale(1.1)"/>
+        <use href="#flower-symbol" transform="translate(260, 160) rotate(45) scale(1.25)"/>
+        <use href="#flower-symbol" transform="translate(205, 195) rotate(-15) scale(0.95)"/>
+        <use href="#bud-symbol" transform="translate(245, 105) rotate(20) scale(1.1)"/>
+
+        <!-- Right Spreading Canopy -->
+        <use href="#flower-symbol" transform="translate(310, 120) rotate(-25) scale(1.15)"/>
+        <use href="#flower-symbol" transform="translate(345, 95) rotate(40) scale(1.05)"/>
+        <use href="#flower-symbol" transform="translate(370, 145) rotate(-10) scale(1.2)"/>
+        <use href="#flower-symbol" transform="translate(400, 175) rotate(30) scale(0.95)"/>
+        <use href="#flower-symbol" transform="translate(330, 165) rotate(-40) scale(1.1)"/>
+        <use href="#bud-symbol" transform="translate(385, 110) rotate(-30) scale(1)"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- =================================================================
+       MAIN APP PAGE CONTENT
+       ================================================================= -->
+  <div class="app-wrapper">
+    <!-- Navbar Header -->
+    <header>
+      <a href="#" class="brand-wrap">
+        <div class="brand-icon-box">
+          <i class="fa-solid fa-fan"></i>
+        </div>
+        <div class="brand-titles">
+          <h2>Sakura Cloud</h2>
+          <span class="jp-sub">桜のクラウド • PUBLIC SHARE</span>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <button class="action-btn" onclick="triggerBlossomBurst()" title="Bấm để thổi bùng cơn mưa hoa đào khắp màn hình!">
+          <i class="fa-solid fa-wind"></i>
+          <span>Thổi Hoa Bay 🌸</span>
+        </button>
+        <button class="action-btn" id="audio-toggle" onclick="toggleChimeAudio()" title="Bật/Tắt tiếng chuông gió phong linh">
+          <i class="fa-solid fa-bell"></i>
+          <span id="audio-label">Chuông Gió</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-badge">
+        <i class="fa-solid fa-seedling"></i>
+        <span>Giao Diện Hoa Anh Đào Mùa Xuân</span>
+      </div>
+      <h1>Chia Sẻ & Tải Ứng Dụng <span class="highlight-text">Công Khai</span></h1>
+      <p>Nền tảng lưu trữ và chia sẻ file ứng dụng trực tiếp. Hỗ trợ đầy đủ gói cài đặt Android APK, phần mềm PC Windows, iOS IPA và tài liệu với tốc độ cao.</p>
+    </section>
+
+    <!-- Main Grid -->
+    <div class="content-grid">
+      <!-- Upload Card -->
+      <div class="glass-card">
+        <div class="card-heading">
+          <div class="card-title">
+            <div class="icon-circle">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+            </div>
+            <span>Đăng Tải File Mới</span>
+          </div>
+          <span class="card-badge">Tốc độ cao</span>
+        </div>
+
+        <!-- Drag & Drop Zone -->
+        <div class="upload-zone" id="drop-zone">
+          <div class="upload-art-icon">
+            <i class="fa-solid fa-file-arrow-up"></i>
+          </div>
+          <h4>Kéo & Thả file vào đây</h4>
+          <p>Hỗ trợ đa định dạng ứng dụng, gói nén & tài liệu công khai</p>
+          
+          <div class="supported-badges">
+            <span class="mini-pill">.APK (Android)</span>
+            <span class="mini-pill">.EXE (Windows)</span>
+            <span class="mini-pill">.ZIP / .RAR</span>
+            <span class="mini-pill">.IPA (iOS)</span>
+          </div>
+
+          <input type="file" id="file-input" class="file-input-hidden">
+        </div>
+
+        <!-- Preview file box -->
+        <div class="selected-preview" id="selected-preview">
+          <div class="selected-info">
+            <div class="file-type-icon" id="preview-type-icon">
+              <i class="fa-solid fa-file-zipper"></i>
+            </div>
+            <div>
+              <div class="selected-name" id="preview-filename">MyApplication.apk</div>
+              <div class="selected-size" id="preview-filesize">28.4 MB</div>
+            </div>
+          </div>
+          <button class="btn-clear-file" id="btn-clear-file" title="Hủy chọn file">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn-sakura-main" id="btn-publish">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <span>Xuất Bản & Tạo Link Tải</span>
+        </button>
+      </div>
+
+      <!-- App Repository Card -->
+      <div class="glass-card">
+        <div class="card-heading">
+          <div class="card-title">
+            <div class="icon-circle">
+              <i class="fa-solid fa-box-open"></i>
+            </div>
+            <span>Kho Ứng Dụng Đã Đăng</span>
+          </div>
+          <span class="card-badge" id="app-counter">3 Ứng dụng</span>
+        </div>
+
+        <div class="app-cards-list" id="apps-container">
+          <!-- Item 1: Android App -->
+          <div class="app-card-item">
+            <div class="app-left">
+              <div class="app-platform-badge badge-android">
+                <i class="fa-brands fa-android"></i>
+              </div>
+              <div class="app-details">
+                <h5>SakuraStream_v3.0.apk</h5>
+                <div class="app-specs">
+                  <span class="tag-category">Android</span>
+                  <span>22.4 MB</span>
+                  <span>• 256 lượt tải</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn-download-app" title="Tải xuống trực tiếp" onclick="handleDownload('SakuraStream_v3.0.apk')">
+              <i class="fa-solid fa-arrow-down-to-bracket"></i>
+            </button>
+          </div>
+
+          <!-- Item 2: Windows Tool -->
+          <div class="app-card-item">
+            <div class="app-left">
+              <div class="app-platform-badge badge-windows">
+                <i class="fa-brands fa-windows"></i>
+              </div>
+              <div class="app-details">
+                <h5>DesktopManager-Setup.exe</h5>
+                <div class="app-specs">
+                  <span class="tag-category">Windows</span>
+                  <span>48.6 MB</span>
+                  <span>• 115 lượt tải</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn-download-app" title="Tải xuống trực tiếp" onclick="handleDownload('DesktopManager-Setup.exe')">
+              <i class="fa-solid fa-arrow-down-to-bracket"></i>
+            </button>
+          </div>
+
+          <!-- Item 3: Zip Archive -->
+          <div class="app-card-item">
+            <div class="app-left">
+              <div class="app-platform-badge badge-zip">
+                <i class="fa-solid fa-file-zipper"></i>
+              </div>
+              <div class="app-details">
+                <h5>AnimePack-FullWallpaper.zip</h5>
+                <div class="app-specs">
+                  <span class="tag-category">Archive</span>
+                  <span>142 MB</span>
+                  <span>• 580 lượt tải</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn-download-app" title="Tải xuống trực tiếp" onclick="handleDownload('AnimePack-FullWallpaper.zip')">
+              <i class="fa-solid fa-arrow-down-to-bracket"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-box" id="toast">
+      <i class="fa-solid fa-circle-check" style="color: #d90448; font-size: 1.3rem;"></i>
+      <span id="toast-text">Thao tác thành công!</span>
+    </div>
+
+    <footer>
+      <p>🌸 Thiết kế phong cách <strong>Sakura Aesthetic</strong> • Sẵn sàng liên kết & deploy tự động với Vercel / Cloudflare</p>
+    </footer>
+  </div>
+
+  <!-- =================================================================
+       JAVASCRIPT: PETAL PHYSICS ENGINE & LOGIC
+       ================================================================= -->
+  <script>
+    // 1. FULLSCREEN PETAL PHYSICS ENGINE
+    const canvas = document.getElementById('sakura-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    class RealisticPetal {
+      constructor(fromTree = false, initialScatter = false) {
+        this.reset(fromTree, initialScatter);
+      }
+
+      reset(fromTree = false, initialScatter = false) {
+        if (fromTree) {
+          this.x = Math.random() * (width * 0.35);
+          this.y = Math.random() * (height * 0.5);
+        } else if (initialScatter) {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+        } else {
+          this.x = Math.random() * width * 0.8 - 30;
+          this.y = -20;
+        }
+
+        this.size = Math.random() * 10 + 7;
+        this.speedX = Math.random() * 2.2 + 1.1; // Gió thổi từ trái sang phải
+        this.speedY = Math.random() * 1.5 + 0.8;
+        this.angle = Math.random() * 360;
+        this.angularSpeed = (Math.random() - 0.5) * 2;
+        this.flip = Math.random() * Math.PI;
+        this.flipSpeed = Math.random() * 0.04 + 0.02;
+
+        this.swayAngle = Math.random() * Math.PI * 2;
+        this.swaySpeed = Math.random() * 0.03 + 0.015;
+        this.swayDistance = Math.random() * 30 + 15;
+
+        const palette = [
+          'rgba(255, 255, 255, 0.95)',
+          'rgba(255, 220, 230, 0.9)',
+          'rgba(255, 182, 193, 0.88)',
+          'rgba(255, 130, 165, 0.82)',
+          'rgba(255, 77, 121, 0.8)'
+        ];
+        this.color = palette[Math.floor(Math.random() * palette.length)];
+      }
+
+      update() {
+        this.swayAngle += this.swaySpeed;
+        this.flip += this.flipSpeed;
+        this.angle += this.angularSpeed;
+
+        this.x += this.speedX + Math.sin(this.swayAngle) * 0.8;
+        this.y += this.speedY;
+
+        if (this.y > height + 25 || this.x > width + 30) {
+          this.reset(Math.random() < 0.35);
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.angle * Math.PI) / 180);
+        ctx.scale(1, Math.cos(this.flip));
+
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.bezierCurveTo(this.size * 0.5, -this.size * 0.6, this.size, -this.size * 0.2, this.size, this.size * 0.5);
+        ctx.bezierCurveTo(this.size, this.size, this.size * 0.4, this.size * 1.35, 0, this.size * 1.5);
+        ctx.bezierCurveTo(-this.size * 0.4, this.size * 1.35, -this.size, this.size, -this.size, this.size * 0.5);
+        ctx.bezierCurveTo(-this.size, -this.size * 0.2, -this.size * 0.5, -this.size * 0.6, 0, 0);
+
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    const PETAL_COUNT = 55;
+    const petals = [];
+    for (let i = 0; i < PETAL_COUNT; i++) {
+      petals.push(new RealisticPetal(i % 2 === 0, true));
+    }
+
+    function animatePetals() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < petals.length; i++) {
+        petals[i].update();
+        petals[i].draw();
+      }
+      requestAnimationFrame(animatePetals);
+    }
+    animatePetals();
+
+    function triggerBlossomBurst() {
+      ringChime();
+      showToast('🌸 Gió xuân thổi qua, cánh hoa bừng nở!');
+      for (let i = 0; i < 25; i++) {
+        const burstPetal = new RealisticPetal(true);
+        burstPetal.speedX = Math.random() * 5 + 3;
+        burstPetal.speedY = Math.random() * 2.5 + 1;
+        petals.push(burstPetal);
+      }
+      setTimeout(() => {
+        while (petals.length > PETAL_COUNT) {
+          petals.pop();
+        }
+      }, 5000);
+    }
+
+    // 2. WEB AUDIO: TIẾNG CHUÔNG PHONG LINH NHẬT BẢN
+    let audioContext = null;
+    let audioEnabled = true;
+
+    function initAudio() {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+    }
+
+    function ringChime() {
+      if (!audioEnabled) return;
+      initAudio();
+      if (!audioContext) return;
+
+      const notes = [587.33, 659.25, 783.99, 880.00, 1046.50, 1174.66];
+      const freq = notes[Math.floor(Math.random() * notes.length)];
+
+      const osc = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioContext.currentTime);
+
+      gain.gain.setValueAtTime(0.08, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 1.8);
+
+      osc.connect(gain);
+      gain.connect(audioContext.destination);
+
+      osc.start();
+      osc.stop(audioContext.currentTime + 1.8);
+    }
+
+    function toggleChimeAudio() {
+      initAudio();
+      audioEnabled = !audioEnabled;
+      const audioLabel = document.getElementById('audio-label');
+      const audioBtn = document.getElementById('audio-toggle');
+      if (audioEnabled) {
+        audioLabel.textContent = 'Chuông Gió';
+        audioBtn.style.color = 'var(--sakura-crimson)';
+        ringChime();
+        showToast('🔔 Đã bật âm thanh chuông gió!');
+      } else {
+        audioLabel.textContent = 'Chuông Gió (Tắt)';
+        audioBtn.style.color = '#888';
+        showToast('🔕 Đã tắt âm thanh.');
+      }
+    }
+
+    // 3. KÉO THẢ & QUẢN LÝ TẢI FILE
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+    const selectedPreview = document.getElementById('selected-preview');
+    const previewFilename = document.getElementById('preview-filename');
+    const previewFilesize = document.getElementById('preview-filesize');
+    const previewTypeIcon = document.getElementById('preview-type-icon');
+    const btnClearFile = document.getElementById('btn-clear-file');
+    const btnPublish = document.getElementById('btn-publish');
+    const appsContainer = document.getElementById('apps-container');
+    const appCounter = document.getElementById('app-counter');
+    const toast = document.getElementById('toast');
+    const toastText = document.getElementById('toast-text');
+
+    let currentFile = null;
+
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      if (e.dataTransfer.files.length > 0) {
+        processSelectedFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        processSelectedFile(e.target.files[0]);
+      }
+    });
+
+    function formatBytes(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(1) + ' MB';
+    }
+
+    function processSelectedFile(file) {
+      currentFile = file;
+      previewFilename.textContent = file.name;
+      previewFilesize.textContent = formatBytes(file.size);
+
+      if (file.name.endsWith('.apk')) {
+        previewTypeIcon.innerHTML = '<i class="fa-brands fa-android" style="color: #16a085;"></i>';
+      } else if (file.name.endsWith('.exe')) {
+        previewTypeIcon.innerHTML = '<i class="fa-brands fa-windows" style="color: #0083b0;"></i>';
+      } else if (file.name.endsWith('.ipa')) {
+        previewTypeIcon.innerHTML = '<i class="fa-brands fa-apple" style="color: #222;"></i>';
+      } else {
+        previewTypeIcon.innerHTML = '<i class="fa-solid fa-file-zipper" style="color: #ff3366;"></i>';
+      }
+
+      selectedPreview.style.display = 'flex';
+      dropZone.style.display = 'none';
+      ringChime();
+    }
+
+    btnClearFile.addEventListener('click', () => {
+      currentFile = null;
+      fileInput.value = '';
+      selectedPreview.style.display = 'none';
+      dropZone.style.display = 'block';
+    });
+
+    function showToast(message) {
+      toastText.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    btnPublish.addEventListener('click', () => {
+      if (!currentFile) {
+        showToast('🌸 Hãy chọn một file trước khi xuất bản bạn nhé!');
+        return;
+      }
+
+      let badgeClass = 'badge-zip';
+      let iconHtml = '<i class="fa-solid fa-file-zipper"></i>';
+      let category = 'Archive';
+
+      if (currentFile.name.endsWith('.apk')) {
+        badgeClass = 'badge-android';
+        iconHtml = '<i class="fa-brands fa-android"></i>';
+        category = 'Android';
+      } else if (currentFile.name.endsWith('.exe')) {
+        badgeClass = 'badge-windows';
+        iconHtml = '<i class="fa-brands fa-windows"></i>';
+        category = 'Windows';
+      } else if (currentFile.name.endsWith('.ipa')) {
+        badgeClass = 'badge-apple';
+        iconHtml = '<i class="fa-brands fa-apple"></i>';
+        category = 'iOS';
+      }
+
+      const card = document.createElement('div');
+      card.className = 'app-card-item';
+      card.innerHTML = `
+        <div class="app-left">
+          <div class="app-platform-badge ${badgeClass}">
+            ${iconHtml}
+          </div>
+          <div class="app-details">
+            <h5>${currentFile.name}</h5>
+            <div class="app-specs">
+              <span class="tag-category">${category}</span>
+              <span>${formatBytes(currentFile.size)}</span>
+              <span>• Vừa mới đăng</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-download-app" title="Tải xuống trực tiếp" onclick="handleDownload('${currentFile.name}')">
+          <i class="fa-solid fa-arrow-down-to-bracket"></i>
+        </button>
+      `;
+
+      appsContainer.prepend(card);
+      appCounter.textContent = `${appsContainer.children.length} Ứng dụng`;
+
+      showToast(`🌸 Đã xuất bản "${currentFile.name}" thành công lên Sakura Cloud!`);
+      triggerBlossomBurst();
+
+      currentFile = null;
+      fileInput.value = '';
+      selectedPreview.style.display = 'none';
+      dropZone.style.display = 'block';
+    });
+
+    function handleDownload(name) {
+      ringChime();
+      showToast(`🌸 Đang bắt đầu tải file: ${name}`);
+    }
+  </script>
+</body>
+</html>
