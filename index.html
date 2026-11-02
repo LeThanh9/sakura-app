@@ -18,11 +18,11 @@
           },
           colors: {
             sakura: {
-              50: '#fff1f4',
-              100: '#ffe4ea',
-              200: '#fecdd8',
-              300: '#fda4b9',
-              400: '#fb7193',
+              50: '#fff0f4',
+              100: '#ffe2eb',
+              200: '#fecad7',
+              300: '#fda4b8',
+              400: '#fb6f8d',
               500: '#f43f6e',
               600: '#e11d5a',
               700: '#be1248',
@@ -43,159 +43,160 @@
 
   <style>
     /* ==========================================================
-       CRYSTAL LIQUID GLASS SYSTEM (CHUẨN DUSCU FLASHER)
-       Kính lỏng trong suốt để nhìn thấu 100% hình nền phong cảnh
+       CRYSTAL LIQUID GLASS SYSTEM (SIÊU TRONG SUỐT - TRANSLUCENT)
+       Kính lỏng trong trẻo chuẩn VisionOS / iOS 18 xuyên thấu hình nền
        ========================================================== */
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: #0f172a;
-      background: #0f172a;
+      color: #1a0812;
+      background: #ffccd8;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* Khung nền lớn bên ngoài: Siêu trong suốt (Chỉ 15-20% độ mờ) */
+    /* Khung nền lớn ngoài: Kính lỏng pha lê siêu trong (Crystal Liquid Shell) */
     .liquid-shell {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%);
-      backdrop-filter: blur(14px) saturate(170%);
-      -webkit-backdrop-filter: blur(14px) saturate(170%);
-      border: 1px solid rgba(255, 255, 255, 0.65);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 100%);
+      backdrop-filter: blur(14px) saturate(160%);
+      -webkit-backdrop-filter: blur(14px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.45);
       box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.25),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.9),
-        inset 0 -1px 1.5px rgba(255, 255, 255, 0.25);
+        0 16px 45px rgba(0, 0, 0, 0.16),
+        0 4px 12px rgba(244, 63, 110, 0.06),
+        inset 0 1px 1px rgba(255, 255, 255, 0.75),
+        inset 0 -1px 1px rgba(255, 255, 255, 0.15);
     }
 
-    /* Các thẻ chức năng: Kính mờ xuyên thấu vừa phải */
+    /* Các thẻ chức năng: Kính trong suốt tinh khiết (Crystal Clear Card) */
     .liquid-card {
-      background: linear-gradient(155deg, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.16) 100%);
-      backdrop-filter: blur(20px) saturate(190%);
-      -webkit-backdrop-filter: blur(20px) saturate(190%);
-      border: 1px solid rgba(255, 255, 255, 0.72);
-      border-radius: 24px;
+      background: linear-gradient(155deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.07) 100%);
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 26px;
       box-shadow:
-        0 10px 28px -6px rgba(0, 0, 0, 0.15),
-        0 2px 6px rgba(0, 0, 0, 0.06),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.92),
-        inset 0 -1px 1px rgba(255, 255, 255, 0.35);
+        0 8px 24px -4px rgba(0, 0, 0, 0.1),
+        0 2px 6px rgba(244, 63, 110, 0.04),
+        inset 0 1.2px 1px rgba(255, 255, 255, 0.7),
+        inset 0 -1px 1px rgba(255, 255, 255, 0.12);
       transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* Thẻ con bên trong */
+    /* Thẻ con bên trong: Kính lỏng xuyên thấu cao cấp (Clear Glass Subcard) */
     .liquid-subcard {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.18) 100%);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.68);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.05) 100%);
+      backdrop-filter: blur(10px) saturate(150%);
+      -webkit-backdrop-filter: blur(10px) saturate(150%);
+      border: 1px solid rgba(255, 255, 255, 0.38);
       transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .liquid-subcard:hover {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.38) 100%);
-      border-color: rgba(255, 255, 255, 0.95);
-      transform: translateY(-1.5px);
-      box-shadow: 0 10px 24px rgba(244, 63, 110, 0.2);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.12) 100%);
+      border-color: rgba(255, 255, 255, 0.75);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(225, 29, 90, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.8);
     }
 
-    /* Thẻ khi đang được chọn (Active) */
+    /* Thẻ khi đang được chọn (Active Glow Card) */
     .liquid-card-active {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 228, 234, 0.5) 100%);
-      backdrop-filter: blur(24px) saturate(200%);
-      -webkit-backdrop-filter: blur(24px) saturate(200%);
-      border: 1.5px solid rgba(255, 255, 255, 1);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.38) 0%, rgba(254, 205, 215, 0.18) 100%);
+      backdrop-filter: blur(14px) saturate(180%);
+      -webkit-backdrop-filter: blur(14px) saturate(180%);
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
       box-shadow:
-        0 14px 32px -6px rgba(225, 29, 90, 0.35),
-        0 4px 12px rgba(244, 63, 110, 0.2),
-        inset 0 2px 2px rgba(255, 255, 255, 1),
-        0 0 0 2px rgba(244, 63, 110, 0.35);
+        0 12px 30px -6px rgba(225, 29, 90, 0.25),
+        0 4px 12px rgba(244, 63, 110, 0.15),
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.85),
+        0 0 0 2px rgba(244, 63, 110, 0.3);
       transform: translateY(-1px);
     }
 
-    /* Nút bấm kính lỏng (Tactile Pill Button) */
+    /* Nút bấm kính lỏng (Tactile Glass Pill Button) */
     .liquid-btn {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.38) 100%);
-      backdrop-filter: blur(20px) saturate(190%);
-      -webkit-backdrop-filter: blur(20px) saturate(190%);
-      border: 1px solid rgba(255, 255, 255, 0.85);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.14) 100%);
+      backdrop-filter: blur(12px) saturate(160%);
+      -webkit-backdrop-filter: blur(12px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.55);
       border-radius: 9999px;
-      color: #0f172a;
+      color: #1e0e15;
       font-weight: 700;
       box-shadow:
-        0 6px 16px -3px rgba(0, 0, 0, 0.12),
-        0 2px 4px rgba(0, 0, 0, 0.06),
-        inset 0 1.5px 0.5px rgba(255, 255, 255, 1),
-        inset 0 -1px 1px rgba(255, 255, 255, 0.4);
+        0 4px 12px -2px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0.5px rgba(255, 255, 255, 0.85),
+        inset 0 -1px 1px rgba(255, 255, 255, 0.15);
       transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .liquid-btn:hover:not(:disabled) {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.6) 100%);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 230, 240, 0.28) 100%);
       transform: translateY(-1.5px);
       box-shadow:
-        0 10px 22px -4px rgba(225, 29, 90, 0.25),
-        inset 0 2px 1px rgba(255, 255, 255, 1);
+        0 8px 20px -3px rgba(225, 29, 90, 0.22),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.95);
     }
 
     .liquid-btn:active:not(:disabled) {
       transform: scale(0.96) translateY(0);
     }
 
-    /* Nút bấm chính nổi bật (Primary Liquid Action Pill) */
+    /* Nút bấm chính nổi bật (Primary Sakura Action Pill) */
     .liquid-btn-primary {
-      background: linear-gradient(180deg, rgba(244, 63, 110, 0.92) 0%, rgba(225, 29, 90, 0.88) 100%);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.8);
+      background: linear-gradient(180deg, rgba(255, 64, 113, 0.92) 0%, rgba(225, 29, 90, 0.94) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(255, 255, 255, 0.8);
       border-radius: 9999px;
       color: #ffffff;
       font-weight: 800;
       box-shadow:
-        0 12px 28px -6px rgba(225, 29, 90, 0.55),
-        0 4px 10px rgba(244, 63, 110, 0.3),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.85),
-        inset 0 -2px 4px rgba(159, 18, 57, 0.45);
+        0 12px 28px -6px rgba(225, 29, 90, 0.5),
+        0 4px 12px rgba(244, 63, 110, 0.3),
+        inset 0 2px 1.5px rgba(255, 255, 255, 0.8),
+        inset 0 -2px 4px rgba(159, 18, 57, 0.4);
       transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .liquid-btn-primary:hover:not(:disabled) {
-      background: linear-gradient(180deg, rgba(251, 113, 147, 0.96) 0%, rgba(244, 63, 110, 0.92) 100%);
-      transform: translateY(-1.5px) scale(1.01);
+      background: linear-gradient(180deg, rgba(255, 89, 132, 0.96) 0%, rgba(244, 63, 110, 0.96) 100%);
+      transform: translateY(-2px) scale(1.015);
       box-shadow:
-        0 16px 34px -6px rgba(225, 29, 90, 0.65),
-        inset 0 2px 1.5px rgba(255, 255, 255, 0.95);
+        0 16px 36px -6px rgba(225, 29, 90, 0.65),
+        inset 0 2px 2px rgba(255, 255, 255, 1);
     }
 
-    /* Ô chọn / Input kính mờ */
+    /* Ô chọn / Input kính mờ trong suốt */
     .liquid-input {
-      background: rgba(255, 255, 255, 0.45);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.45);
       border-radius: 16px;
-      color: #0f172a;
+      color: #1e0e15;
       box-shadow:
-        inset 0 2px 4px rgba(0, 0, 0, 0.05),
-        0 1px 2px rgba(255, 255, 255, 0.85);
+        inset 0 1.5px 3px rgba(0, 0, 0, 0.04),
+        0 1px 2px rgba(255, 255, 255, 0.5);
       transition: all 0.2s ease;
     }
 
     .liquid-input:focus {
-      background: rgba(255, 255, 255, 0.85);
-      border-color: rgba(244, 63, 110, 0.75);
+      background: rgba(255, 255, 255, 0.42);
+      border-color: rgba(244, 63, 110, 0.8);
       box-shadow:
-        0 0 0 3px rgba(244, 63, 110, 0.2),
-        inset 0 1px 2px rgba(0, 0, 0, 0.03);
+        0 0 0 3px rgba(244, 63, 110, 0.25),
+        inset 0 1px 2px rgba(0, 0, 0, 0.04);
     }
 
     /* Viên thuốc kính trượt mượt dưới thanh Tab (Sliding Glass Pill) */
     .sliding-glass-pill {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.75) 100%);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 1);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 225, 235, 0.3) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1.2px solid rgba(255, 255, 255, 0.75);
       box-shadow:
-        0 4px 14px rgba(225, 29, 90, 0.2),
-        0 1px 3px rgba(0, 0, 0, 0.08),
-        inset 0 1.5px 1px rgba(255, 255, 255, 1);
+        0 4px 14px rgba(225, 29, 90, 0.18),
+        0 1px 4px rgba(0, 0, 0, 0.08),
+        inset 0 1.2px 1px rgba(255, 255, 255, 0.9);
       transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -218,15 +219,15 @@
       will-change: transform, opacity, filter;
     }
 
-    /* Thanh cuộn */
+    /* Thanh cuộn tinh tế */
     .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(225, 29, 90, 0.3);
+      background: rgba(225, 29, 90, 0.35);
       border-radius: 9999px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: rgba(225, 29, 90, 0.6);
+      background: rgba(225, 29, 90, 0.7);
     }
 
     /* Canvas Sakura rơi */
@@ -237,25 +238,150 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 5;
+      z-index: 8;
+    }
+
+    /* CÀNH HOA ANH ĐÀO NỞ RỘ TRÊN GÓC MÀN HÌNH (OVERHANGING SAKURA BOUGHS) */
+    .sakura-branch-top-right {
+      position: fixed;
+      top: -20px;
+      right: -30px;
+      width: 380px;
+      height: 280px;
+      pointer-events: none;
+      z-index: 6;
+      filter: drop-shadow(0 10px 25px rgba(225, 29, 90, 0.22));
+      animation: branchGentleSway 8s ease-in-out infinite alternate;
+      transform-origin: top right;
+    }
+
+    .sakura-branch-top-left {
+      position: fixed;
+      top: -20px;
+      left: -30px;
+      width: 320px;
+      height: 240px;
+      pointer-events: none;
+      z-index: 6;
+      filter: drop-shadow(0 10px 25px rgba(225, 29, 90, 0.22));
+      animation: branchGentleSwayLeft 9s ease-in-out infinite alternate;
+      transform-origin: top left;
+    }
+
+    @keyframes branchGentleSway {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(2.5deg); }
+    }
+    @keyframes branchGentleSwayLeft {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-2deg); }
     }
   </style>
 </head>
-<body class="m-0 p-0 h-screen overflow-hidden flex flex-col select-none relative">
+<body class="m-0 p-0 h-screen overflow-hidden flex flex-col select-none relative" id="body-bg">
 
   <!-- =========================================================================
-       THỰC THỂ HÌNH NỀN 4K (DÙNG THẺ IMG ĐẢM BẢO HIỂN THỊ RÕ 100%)
+       THỰC THỂ HÌNH NỀN SAKURA HỒNG THƠ MỘNG 4K (DÙNG THẺ IMG RÕ 100%)
        ========================================================================= -->
   <img 
     id="main-bg-img" 
-    src="bg-pagoda.jpg" 
-    alt="Sakura Landscape" 
+    src="bg-pink-sakura.jpg" 
+    alt="Pink Sakura Paradise" 
     class="fixed inset-0 w-full h-full object-cover pointer-events-none z-0 transition-opacity duration-700 ease-in-out" 
   />
 
-  <!-- Lớp phủ ánh sáng tinh tế (Đủ tối nhẹ để chữ nổi bật, nhưng vẫn nhìn rõ cảnh 4K) -->
-  <div class="fixed inset-0 bg-slate-950/25 pointer-events-none z-1"></div>
-  <div class="fixed inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-slate-900/35 pointer-events-none z-1"></div>
+  <!-- Lớp phủ tạo tương phản dịu nhẹ giúp kính trong suốt nổi bật, không làm mờ hình nền 4K -->
+  <div class="fixed inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/25 pointer-events-none z-1"></div>
+  <div class="fixed inset-0 bg-rose-950/5 pointer-events-none z-1"></div>
+
+  <!-- CÀNH HOA ANH ĐÀO NỞ RỰC RỠ RỦ XUỐNG TỪ GÓC PHẢI TRÊN (SVG CHI TIẾT) -->
+  <div class="sakura-branch-top-right">
+    <svg viewBox="0 0 380 280" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="bloomPetalPink" cx="40%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="45%" stop-color="#ffd5e2"/>
+          <stop offset="85%" stop-color="#ff6584"/>
+          <stop offset="100%" stop-color="#d90448"/>
+        </radialGradient>
+      </defs>
+      <!-- Twig branches -->
+      <path d="M 380,0 Q 320,60 260,90 Q 200,120 120,130" stroke="#3d1421" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M 280,80 Q 220,110 170,160 Q 140,190 100,210" stroke="#4a1928" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+      <path d="M 220,115 Q 180,95 130,90" stroke="#3d1421" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <path d="M 170,160 Q 140,150 110,155" stroke="#3d1421" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+      <!-- Flowers on Branch -->
+      <!-- Flower 1 -->
+      <g transform="translate(120, 130)">
+        <circle cx="0" cy="-10" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="10" cy="-3" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="6" cy="9" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="-6" cy="9" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="-10" cy="-3" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="0" cy="0" r="4" fill="#a8002a"/>
+        <circle cx="0" cy="0" r="1.5" fill="#ffe066"/>
+      </g>
+      <!-- Flower 2 -->
+      <g transform="translate(170, 160) scale(1.15) rotate(25)">
+        <circle cx="0" cy="-10" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="10" cy="-3" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="6" cy="9" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="-6" cy="9" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="-10" cy="-3" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="0" cy="0" r="4" fill="#a8002a"/>
+        <circle cx="0" cy="0" r="1.5" fill="#ffe066"/>
+      </g>
+      <!-- Flower 3 -->
+      <g transform="translate(100, 210) scale(0.9) rotate(-15)">
+        <circle cx="0" cy="-10" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="10" cy="-3" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="6" cy="9" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="-6" cy="9" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="-10" cy="-3" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="0" cy="0" r="4" fill="#a8002a"/>
+        <circle cx="0" cy="0" r="1.5" fill="#ffe066"/>
+      </g>
+      <!-- Flower 4 -->
+      <g transform="translate(260, 90) scale(1.2) rotate(45)">
+        <circle cx="0" cy="-10" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="10" cy="-3" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="6" cy="9" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="-6" cy="9" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="-10" cy="-3" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="0" cy="0" r="4" fill="#a8002a"/>
+        <circle cx="0" cy="0" r="1.5" fill="#ffe066"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- CÀNH HOA ANH ĐÀO NỞ RỰC RỠ GÓC TRÁI TRÊN -->
+  <div class="sakura-branch-top-left">
+    <svg viewBox="0 0 320 240" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 0,0 Q 60,50 120,70 Q 180,90 240,95" stroke="#3d1421" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M 100,65 Q 140,95 180,135 Q 210,165 240,180" stroke="#4a1928" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      <!-- Flower Left 1 -->
+      <g transform="translate(240, 95) scale(1.1) rotate(15)">
+        <circle cx="0" cy="-10" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="10" cy="-3" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="6" cy="9" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="-6" cy="9" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="-10" cy="-3" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="0" cy="0" r="4" fill="#a8002a"/>
+        <circle cx="0" cy="0" r="1.5" fill="#ffe066"/>
+      </g>
+      <!-- Flower Left 2 -->
+      <g transform="translate(180, 135) scale(0.9) rotate(-30)">
+        <circle cx="0" cy="-10" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="10" cy="-3" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="6" cy="9" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="-6" cy="9" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="-10" cy="-3" r="10" fill="url(#bloomPetalPink)"/>
+        <circle cx="0" cy="0" r="4" fill="#a8002a"/>
+        <circle cx="0" cy="0" r="1.5" fill="#ffe066"/>
+      </g>
+    </svg>
+  </div>
 
   <!-- Sakura Falling Petals Canvas -->
   <canvas id="sakura-canvas"></canvas>
@@ -269,17 +395,17 @@
     <header class="liquid-shell rounded-full px-4 py-2.5 flex items-center justify-between shrink-0 z-20">
       <div class="flex items-center gap-3">
         <!-- Logo Spinner -->
-        <div class="w-10 h-10 rounded-full bg-white/70 border border-white/90 shadow-sm flex items-center justify-center overflow-hidden p-0.5 text-sakura-600 text-lg">
+        <div class="w-10 h-10 rounded-full bg-white/30 backdrop-blur-md border border-white/60 shadow-sm flex items-center justify-center overflow-hidden p-0.5 text-sakura-600 text-lg">
           <i class="fa-solid fa-fan animate-spin" style="animation-duration: 12s;"></i>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 flex items-center gap-2 drop-shadow-sm">
-              Sakura Cloud
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sakura-500/25 text-sakura-800 border border-sakura-400/50">v3.4 4K</span>
+            <h1 class="text-sm sm:text-base font-black tracking-tight text-slate-900 flex items-center gap-2">
+              Sakura Cloud 🌸
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sakura-500/25 text-sakura-800 border border-sakura-400/50">満開 Full Bloom</span>
             </h1>
           </div>
-          <p class="text-[11px] text-slate-800 font-semibold hidden sm:block drop-shadow-sm">
+          <p class="text-[11px] text-slate-800 font-semibold hidden sm:block">
             Nền tảng Tải & Chia Sẻ Ứng Dụng Công Khai • APK • EXE • ZIP • IPA
           </p>
         </div>
@@ -293,7 +419,7 @@
           title="Bấm để đổi giữa các hình nền hoa anh đào khác nhau"
           class="liquid-btn px-3.5 py-1.5 text-xs flex items-center gap-1.5 text-sakura-800 font-extrabold">
           <i class="fa-solid fa-image text-sakura-600"></i>
-          <span class="hidden md:inline" id="wallpaper-label">Nền: Tháp Cổ Sakura</span>
+          <span class="hidden md:inline" id="wallpaper-label">Nền: Rừng Đào Nở Rộ</span>
         </button>
 
         <button 
@@ -301,7 +427,7 @@
           title="Thổi bùng cơn mưa cánh hoa anh đào"
           class="liquid-btn px-3.5 py-1.5 text-xs flex items-center gap-1.5 text-sakura-700">
           <i class="fa-solid fa-wind text-sakura-600"></i>
-          <span class="hidden md:inline">Thổi Hoa Bay 🌸</span>
+          <span class="hidden md:inline">Mưa Hoa Đào 🌸</span>
         </button>
 
         <button 
@@ -341,18 +467,18 @@
         <div class="liquid-card p-3.5 space-y-2.5">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold text-slate-900 flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-sakura-500/20 text-sakura-700 flex items-center justify-center text-[11px]">
+              <span class="w-6 h-6 rounded-full bg-sakura-500/25 text-sakura-700 flex items-center justify-center text-[11px]">
                 <i class="fa-solid fa-cloud"></i>
               </span>
               Kho Lưu Trữ Công Khai
             </span>
-            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-emerald-500/20 text-emerald-800 border-emerald-400/60 flex items-center gap-1">
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-emerald-500/25 text-emerald-900 border-emerald-400/60 flex items-center gap-1">
               <i class="fa-solid fa-circle-check text-[10px]"></i>
               GitHub Pages Ready
             </span>
           </div>
 
-          <div class="flex items-center justify-between text-xs text-slate-900 bg-white/55 p-2.5 rounded-xl border border-white/90">
+          <div class="flex items-center justify-between text-xs text-slate-900 bg-white/20 backdrop-blur-md p-2.5 rounded-xl border border-white/45">
             <div class="flex items-center gap-2">
               <i class="fa-solid fa-link text-sakura-600"></i>
               <span class="font-mono text-[11px] font-bold truncate max-w-[240px]">lethanh9.github.io/sakura-app</span>
@@ -367,12 +493,12 @@
         <div class="liquid-card p-3.5 space-y-3">
           <div class="flex items-center justify-between">
             <span class="text-xs font-bold text-slate-900 flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-700 flex items-center justify-center text-[11px]">
+              <span class="w-6 h-6 rounded-full bg-rose-500/25 text-rose-700 flex items-center justify-center text-[11px]">
                 <i class="fa-solid fa-crown"></i>
               </span>
               Ứng Dụng Tiêu Biểu (Featured)
             </span>
-            <span class="text-[11px] font-bold text-slate-800 bg-white/50 px-2.5 py-0.5 rounded-full border border-white/80">
+            <span class="text-[11px] font-bold text-slate-800 bg-white/25 backdrop-blur-sm px-2.5 py-0.5 rounded-full border border-white/45">
               Top 1 Tải Nhiều
             </span>
           </div>
@@ -386,8 +512,8 @@
                 </div>
                 <div class="min-w-0">
                   <div class="flex items-center gap-1.5 flex-wrap">
-                    <span class="text-xs font-extrabold text-slate-950 truncate">
-                      SakuraStream Pro v3.4
+                    <span class="text-xs font-black text-slate-950 truncate">
+                      SakuraStream Pro v3.5
                     </span>
                     <span class="text-[10px] font-bold bg-rose-500/20 text-rose-800 px-2 py-0.5 rounded-full">
                       Mới Nhất
@@ -398,7 +524,7 @@
               </div>
 
               <div class="text-right shrink-0">
-                <button onclick="triggerDownloadApp('SakuraStream Pro v3.4.apk')" class="text-[11px] font-extrabold px-3 py-1 rounded-full inline-block bg-sakura-600 text-white shadow-sm hover:bg-sakura-700 transition-colors">
+                <button onclick="triggerDownloadApp('SakuraStream Pro v3.5.apk')" class="text-[11px] font-black px-3.5 py-1.5 rounded-full inline-block bg-sakura-600 text-white shadow-md hover:bg-sakura-700 transition-colors">
                   Tải Ngay
                 </button>
               </div>
@@ -410,7 +536,7 @@
         <div class="liquid-card p-3.5 space-y-2.5">
           <div class="flex items-center justify-between text-xs">
             <span class="font-bold text-slate-900 flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-sky-500/20 text-sky-700 flex items-center justify-center text-[11px]">
+              <span class="w-6 h-6 rounded-full bg-sky-500/25 text-sky-700 flex items-center justify-center text-[11px]">
                 <i class="fa-solid fa-file-arrow-up"></i>
               </span>
               Tải Lên File Ứng Dụng Mới
@@ -427,7 +553,7 @@
           </div>
 
           <!-- Drag and drop zone -->
-          <label id="upload-drop-zone" class="border-2 border-dashed border-white/90 hover:border-sakura-400 rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all bg-white/40 hover:bg-white/60">
+          <label id="upload-drop-zone" class="border-2 border-dashed border-white/45 hover:border-sakura-400 rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all bg-white/15 hover:bg-white/25 backdrop-blur-sm">
             <input 
               type="file" 
               id="file-input-control" 
@@ -438,12 +564,12 @@
               <div class="w-10 h-10 rounded-full bg-sakura-500/25 text-sakura-700 flex items-center justify-center mx-auto mb-2 text-lg">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
               </div>
-              <p class="font-extrabold text-slate-950">Chạm hoặc kéo thả file vào đây</p>
+              <p class="font-black text-slate-950">Chạm hoặc kéo thả file vào đây</p>
               <p class="text-[11px] text-slate-700 font-medium mt-0.5">Hỗ trợ .APK, .EXE, .ZIP, .IPA, .BIN</p>
             </div>
 
             <div id="file-loaded-info" class="text-center hidden">
-              <div class="text-xs font-extrabold text-slate-950 truncate max-w-[300px]" id="selected-file-name">App-name.apk</div>
+              <div class="text-xs font-black text-slate-950 truncate max-w-[300px]" id="selected-file-name">App-name.apk</div>
               <div class="text-[11px] text-emerald-800 font-bold mt-0.5" id="selected-file-size">18.5 MB • Đã sẵn sàng xuất bản</div>
             </div>
           </label>
@@ -467,7 +593,7 @@
 
           <button 
             id="btn-publish-execute"
-            class="w-full py-3.5 px-5 rounded-full text-xs sm:text-sm font-extrabold tracking-wide flex items-center justify-center gap-2 relative overflow-hidden liquid-btn-primary cursor-pointer">
+            class="w-full py-3.5 px-5 rounded-full text-xs sm:text-sm font-black tracking-wide flex items-center justify-center gap-2 relative overflow-hidden liquid-btn-primary cursor-pointer">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
             <span id="publish-btn-text">Xuất Bản & Thêm Vào Kho</span>
             <div 
@@ -486,9 +612,9 @@
       <div class="flex-1 liquid-shell rounded-[32px] flex flex-col overflow-hidden min-w-0">
         
         <!-- Thanh Tab Pill Bo Tròn có hiệu ứng Trượt Kính (Sliding Glass Pill) -->
-        <div class="flex items-center justify-between px-4 py-3 border-b border-white/50 bg-white/20 shrink-0 flex-wrap gap-2">
+        <div class="flex items-center justify-between px-4 py-3 border-b border-white/20 bg-white/10 backdrop-blur-sm shrink-0 flex-wrap gap-2">
           
-          <div id="tab-nav-container" class="relative flex items-center gap-1 bg-white/40 p-1 rounded-full border border-white/80">
+          <div id="tab-nav-container" class="relative flex items-center gap-1 bg-white/20 backdrop-blur-md p-1 rounded-full border border-white/40">
             <!-- Viên thuốc kính trượt tự động (Sliding Glass Pill) -->
             <div 
               id="sliding-pill-indicator" 
@@ -503,7 +629,7 @@
               class="relative z-10 py-1.5 px-4 rounded-full text-xs font-bold transition-colors duration-300 flex items-center gap-1.5 text-sakura-700">
               <i class="fa-solid fa-box-open text-[11px]"></i>
               <span>Kho Ứng Dụng</span>
-              <span id="repo-count-badge" class="ml-1 text-[10px] bg-sakura-500/20 text-sakura-800 px-1.5 py-0.2 rounded-full font-mono">4</span>
+              <span id="repo-count-badge" class="ml-1 text-[10px] bg-sakura-500/25 text-sakura-900 px-1.5 py-0.2 rounded-full font-mono">4</span>
             </button>
 
             <!-- Tab 2: Nhật Ký Hệ Thống -->
@@ -527,7 +653,7 @@
 
           <!-- Các nút điều khiển phụ bên phải -->
           <div class="flex items-center gap-2">
-            <div class="flex items-center gap-1 bg-white/50 px-2.5 py-1 rounded-full border border-white/80 text-xs text-slate-900 font-bold">
+            <div class="flex items-center gap-1 bg-white/20 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/40 text-xs text-slate-900 font-bold">
               <i class="fa-solid fa-filter text-sakura-600 text-[10px]"></i>
               <select id="filter-category" onchange="filterCategory(this.value)" class="bg-transparent font-bold outline-none cursor-pointer text-xs">
                 <option value="all">Tất cả định dạng</option>
@@ -554,7 +680,7 @@
           <!-- TAB 1: KHO ỨNG DỤNG (APP REPOSITORY) -->
           <div id="tab-pane-repo" class="tab-pane-animate space-y-3">
             <div class="flex items-center justify-between pb-1">
-              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 flex items-center gap-2 drop-shadow-sm">
+              <h3 class="text-xs font-black uppercase tracking-wider text-slate-900 flex items-center gap-2 drop-shadow-sm">
                 <i class="fa-solid fa-layer-group text-sakura-600"></i>
                 Danh sách File & Ứng Dụng Đã Xuất Bản
               </h3>
@@ -571,8 +697,8 @@
                     </div>
                     <div>
                       <div class="flex items-center gap-2">
-                        <h4 class="text-sm font-extrabold text-slate-900 group-hover:text-sakura-700 transition-colors">SakuraStream Pro</h4>
-                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-800 border border-emerald-400/50">v3.4</span>
+                        <h4 class="text-sm font-black text-slate-900 group-hover:text-sakura-700 transition-colors">SakuraStream Pro</h4>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-800 border border-emerald-400/50">v3.5</span>
                       </div>
                       <p class="text-[11px] text-slate-800 mt-0.5 font-medium">Ứng dụng xem Anime & tin tức hoa anh đào mượt mà</p>
                     </div>
@@ -584,10 +710,10 @@
                     <i class="fa-solid fa-hard-drive text-slate-600"></i> 24.5 MB • 430 lượt tải
                   </span>
                   <div class="flex items-center gap-1.5">
-                    <button onclick="showQrModal('SakuraStream Pro v3.4.apk')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-800" title="Mã QR tải nhanh">
+                    <button onclick="showQrModal('SakuraStream Pro v3.5.apk')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-800" title="Mã QR tải nhanh">
                       <i class="fa-solid fa-qrcode"></i>
                     </button>
-                    <button onclick="triggerDownloadApp('SakuraStream Pro v3.4.apk')" class="liquid-btn px-3 py-1 text-[11px] font-extrabold text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
+                    <button onclick="triggerDownloadApp('SakuraStream Pro v3.5.apk')" class="liquid-btn px-3 py-1 text-[11px] font-black text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
                       <i class="fa-solid fa-download"></i> Tải Về
                     </button>
                   </div>
@@ -603,7 +729,7 @@
                     </div>
                     <div>
                       <div class="flex items-center gap-2">
-                        <h4 class="text-sm font-extrabold text-slate-900 group-hover:text-sakura-700 transition-colors">DesktopHelper-Setup</h4>
+                        <h4 class="text-sm font-black text-slate-900 group-hover:text-sakura-700 transition-colors">DesktopHelper-Setup</h4>
                         <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-800 border border-sky-400/50">v2.1</span>
                       </div>
                       <p class="text-[11px] text-slate-800 mt-0.5 font-medium">Công cụ quản lý máy tính & hình nền động Sakura</p>
@@ -619,7 +745,7 @@
                     <button onclick="showQrModal('DesktopHelper-Setup.exe')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-800" title="Mã QR tải nhanh">
                       <i class="fa-solid fa-qrcode"></i>
                     </button>
-                    <button onclick="triggerDownloadApp('DesktopHelper-Setup.exe')" class="liquid-btn px-3 py-1 text-[11px] font-extrabold text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
+                    <button onclick="triggerDownloadApp('DesktopHelper-Setup.exe')" class="liquid-btn px-3 py-1 text-[11px] font-black text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
                       <i class="fa-solid fa-download"></i> Tải Về
                     </button>
                   </div>
@@ -635,7 +761,7 @@
                     </div>
                     <div>
                       <div class="flex items-center gap-2">
-                        <h4 class="text-sm font-extrabold text-slate-900 group-hover:text-sakura-700 transition-colors">Sakura-4K-Wallpaper-Pack</h4>
+                        <h4 class="text-sm font-black text-slate-900 group-hover:text-sakura-700 transition-colors">Sakura-4K-Wallpaper-Pack</h4>
                         <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-800 border border-amber-400/50">ZIP</span>
                       </div>
                       <p class="text-[11px] text-slate-800 mt-0.5 font-medium">Bộ sưu tập 50 hình nền hoa anh đào Nhật Bản 4K siêu nét</p>
@@ -651,7 +777,7 @@
                     <button onclick="showQrModal('Sakura-4K-Wallpaper-Pack.zip')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-800" title="Mã QR tải nhanh">
                       <i class="fa-solid fa-qrcode"></i>
                     </button>
-                    <button onclick="triggerDownloadApp('Sakura-4K-Wallpaper-Pack.zip')" class="liquid-btn px-3 py-1 text-[11px] font-extrabold text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
+                    <button onclick="triggerDownloadApp('Sakura-4K-Wallpaper-Pack.zip')" class="liquid-btn px-3 py-1 text-[11px] font-black text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
                       <i class="fa-solid fa-download"></i> Tải Về
                     </button>
                   </div>
@@ -667,7 +793,7 @@
                     </div>
                     <div>
                       <div class="flex items-center gap-2">
-                        <h4 class="text-sm font-extrabold text-slate-900 group-hover:text-sakura-700 transition-colors">ESP32-Sakura-Firmware</h4>
+                        <h4 class="text-sm font-black text-slate-900 group-hover:text-sakura-700 transition-colors">ESP32-Sakura-Firmware</h4>
                         <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-800 border border-purple-400/50">BIN</span>
                       </div>
                       <p class="text-[11px] text-slate-800 mt-0.5 font-medium">Bản dựng Firmware Bruce phần cứng ESP32 / S3</p>
@@ -683,7 +809,7 @@
                     <button onclick="showQrModal('ESP32-Sakura-Firmware.bin')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-800" title="Mã QR tải nhanh">
                       <i class="fa-solid fa-qrcode"></i>
                     </button>
-                    <button onclick="triggerDownloadApp('ESP32-Sakura-Firmware.bin')" class="liquid-btn px-3 py-1 text-[11px] font-extrabold text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
+                    <button onclick="triggerDownloadApp('ESP32-Sakura-Firmware.bin')" class="liquid-btn px-3 py-1 text-[11px] font-black text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
                       <i class="fa-solid fa-download"></i> Tải Về
                     </button>
                   </div>
@@ -704,19 +830,19 @@
               </span>
             </div>
 
-            <div class="bg-slate-950/85 backdrop-blur-xl border border-white/30 rounded-2xl p-4 font-mono text-xs text-slate-200 h-[480px] overflow-y-auto custom-scrollbar space-y-1.5 shadow-inner" id="console-output">
-              <div class="text-slate-500">// Sakura Cloud File Storage v3.4 4K (C) 2026 LeThanh9</div>
+            <div class="bg-slate-950/60 backdrop-blur-xl border border-white/20 rounded-2xl p-4 font-mono text-xs text-slate-200 h-[480px] overflow-y-auto custom-scrollbar space-y-1.5 shadow-inner" id="console-output">
+              <div class="text-slate-400">// Sakura Cloud File Storage v3.5 (C) 2026 LeThanh9</div>
               <div class="text-emerald-400">[INIT] Hệ thống lưu trữ đám mây hoa anh đào sẵn sàng hoạt động.</div>
               <div class="text-sky-300">[HOST] Tên miền công khai: https://lethanh9.github.io/sakura-app/</div>
               <div class="text-slate-300">[READY] Đã nạp danh sách 4 ứng dụng mặc định vào bộ nhớ.</div>
-              <div class="text-sakura-400">[SPRING] Đã kích hoạt hình nền hoa anh đào Nhật Bản 4K siêu nét (Ảnh thực tế 100%).</div>
+              <div class="text-sakura-300">[SAKURA] Đã kích hoạt không gian hoa anh đào rực rỡ và cành đào rủ nghệ thuật.</div>
             </div>
           </div>
 
           <!-- TAB 3: SỔ TAY & HƯỚNG DẪN CÀI ĐẶT (INSTALLATION MANUAL) -->
           <div id="tab-pane-guide" class="tab-pane-animate hidden space-y-3">
-            <div class="liquid-card p-4 space-y-3">
-              <h3 class="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+            <div class="liquid-subcard p-4 rounded-2xl space-y-3">
+              <h3 class="text-sm font-black text-slate-900 flex items-center gap-2">
                 <i class="fa-brands fa-android text-emerald-600 text-lg"></i>
                 Hướng Dẫn Cài Đặt File .APK Trên Điện Thoại Android
               </h3>
@@ -728,8 +854,8 @@
               </ol>
             </div>
 
-            <div class="liquid-card p-4 space-y-3">
-              <h3 class="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+            <div class="liquid-subcard p-4 rounded-2xl space-y-3">
+              <h3 class="text-sm font-black text-slate-900 flex items-center gap-2">
                 <i class="fa-brands fa-windows text-blue-600 text-lg"></i>
                 Hướng Dẫn Mở File .EXE Trên Máy Tính Windows
               </h3>
@@ -756,8 +882,8 @@
         <i class="fa-solid fa-qrcode"></i>
       </div>
       <div>
-        <h4 class="text-base font-extrabold text-slate-900" id="qr-modal-title">Quét Mã Để Tải Về</h4>
-        <p class="text-xs text-slate-700 mt-1">Dùng camera điện thoại hoặc Zalo để quét mã tải trực tiếp</p>
+        <h4 class="text-base font-black text-slate-900" id="qr-modal-title">Quét Mã Để Tải Về</h4>
+        <p class="text-xs text-slate-700 mt-1 font-medium">Dùng camera điện thoại hoặc Zalo để quét mã tải trực tiếp</p>
       </div>
 
       <div class="bg-white p-3 rounded-2xl border border-white/80 shadow-md inline-block mx-auto">
@@ -789,7 +915,7 @@
        JAVASCRIPT: LOGIC & PETAL PHYSICS ENGINE
        ========================================================================= -->
   <script>
-    // 1. SLIDING PILL TAB LOGIC (Y HỆT DUSCU FLASHER)
+    // 1. SLIDING PILL TAB LOGIC
     const tabIndicator = document.getElementById('sliding-pill-indicator');
     const tabContainer = document.getElementById('tab-nav-container');
 
@@ -820,7 +946,6 @@
       playChime();
     }
 
-    // Init tab indicator position on load
     window.addEventListener('load', () => {
       const initBtn = document.getElementById('tab-btn-repo');
       updateSlidingPill(initBtn);
@@ -830,11 +955,11 @@
       if (currentBtn) updateSlidingPill(currentBtn);
     });
 
-    // 2. WALLPAPER SWITCHER (THAY ĐỔI HÌNH NỀN PHONG CẢNH SAKURA QUA THẺ IMG)
+    // 2. WALLPAPER SWITCHER (THAY ĐỔI HÌNH NỀN SAKURA HỒNG THƠ MỘNG)
     const wallpapers = [
-      { name: 'Nền: Tháp Cổ Sakura', file: 'bg-pagoda.jpg' },
-      { name: 'Nền: Vườn Đào Kyoto', file: 'bg-kyoto.jpg' },
-      { name: 'Nền: Anime Sakura', file: 'bg-anime.jpg' }
+      { name: 'Nền: Rừng Đào Nở Rộ', file: 'bg-pink-sakura.jpg' },
+      { name: 'Nền: Hoa Đào Mộng Mơ', file: 'bg-dreamy-pink.jpg' },
+      { name: 'Nền: Vườn Đào Kyoto', file: 'bg-kyoto.jpg' }
     ];
     let currentWpIndex = 0;
 
@@ -876,16 +1001,16 @@
 
     dropZone.addEventListener('dragover', (e) => {
       e.preventDefault();
-      dropZone.classList.add('border-sakura-500', 'bg-white/60');
+      dropZone.classList.add('border-sakura-500', 'bg-white/70');
     });
 
     dropZone.addEventListener('dragleave', () => {
-      dropZone.classList.remove('border-sakura-500', 'bg-white/60');
+      dropZone.classList.remove('border-sakura-500', 'bg-white/70');
     });
 
     dropZone.addEventListener('drop', (e) => {
       e.preventDefault();
-      dropZone.classList.remove('border-sakura-500', 'bg-white/60');
+      dropZone.classList.remove('border-sakura-500', 'bg-white/70');
       if (e.dataTransfer.files.length > 0) {
         handleFileChosen(e.dataTransfer.files[0]);
       }
@@ -981,7 +1106,7 @@
             </div>
             <div>
               <div class="flex items-center gap-2">
-                <h4 class="text-sm font-extrabold text-slate-900 group-hover:text-sakura-700 transition-colors">${currentFile.name}</h4>
+                <h4 class="text-sm font-black text-slate-900 group-hover:text-sakura-700 transition-colors">${currentFile.name}</h4>
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sakura-500/20 text-sakura-800 border border-sakura-400/50">${version}</span>
               </div>
               <p class="text-[11px] text-slate-700 mt-0.5 font-medium">Ứng dụng vừa được xuất bản thành công</p>
@@ -989,14 +1114,14 @@
           </div>
         </div>
         <div class="flex items-center justify-between pt-2 border-t border-white/60 text-[11px] text-slate-700">
-          <span class="flex items-center gap-1 font-mono font-semibold">
+          <span class="flex items-center gap-1 font-mono font-bold">
             <i class="fa-solid fa-hard-drive text-slate-500"></i> ${formatBytes(currentFile.size)} • Vừa đăng
           </span>
           <div class="flex items-center gap-1.5">
-            <button onclick="showQrModal('${currentFile.name}')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-700">
+            <button onclick="showQrModal('${currentFile.name}')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-800" title="Mã QR tải nhanh">
               <i class="fa-solid fa-qrcode"></i>
             </button>
-            <button onclick="triggerDownloadApp('${currentFile.name}')" class="liquid-btn px-3 py-1 text-[11px] font-bold text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
+            <button onclick="triggerDownloadApp('${currentFile.name}')" class="liquid-btn px-3 py-1 text-[11px] font-black text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
               <i class="fa-solid fa-download"></i> Tải Về
             </button>
           </div>
@@ -1127,7 +1252,7 @@
       }
     });
 
-    // 7. SAKURA CANVAS PETALS ENGINE
+    // 7. SAKURA CANVAS PETALS BLIZZARD (HANA-FUBUKI 花吹雪)
     const canvas = document.getElementById('sakura-canvas');
     const ctx = canvas.getContext('2d');
     let w = canvas.width = window.innerWidth;
@@ -1144,8 +1269,8 @@
       }
       reset(fromTree = false, init = false) {
         if (fromTree) {
-          this.x = Math.random() * (w * 0.35);
-          this.y = Math.random() * (h * 0.5);
+          this.x = Math.random() * (w * 0.4);
+          this.y = Math.random() * (h * 0.4);
         } else if (init) {
           this.x = Math.random() * w;
           this.y = Math.random() * h;
@@ -1153,22 +1278,22 @@
           this.x = Math.random() * w * 0.85 - 20;
           this.y = -20;
         }
-        this.size = Math.random() * 9 + 7;
-        this.speedX = Math.random() * 2.2 + 1.0;
-        this.speedY = Math.random() * 1.5 + 0.8;
+        this.size = Math.random() * 11 + 8;
+        this.speedX = Math.random() * 2.4 + 1.2;
+        this.speedY = Math.random() * 1.6 + 0.9;
         this.angle = Math.random() * 360;
-        this.angularSpeed = (Math.random() - 0.5) * 2;
+        this.angularSpeed = (Math.random() - 0.5) * 2.2;
         this.flip = Math.random() * Math.PI;
-        this.flipSpeed = Math.random() * 0.04 + 0.02;
+        this.flipSpeed = Math.random() * 0.045 + 0.02;
         this.swayAngle = Math.random() * Math.PI * 2;
-        this.swaySpeed = Math.random() * 0.03 + 0.015;
+        this.swaySpeed = Math.random() * 0.035 + 0.015;
 
         const shades = [
           'rgba(255, 255, 255, 0.95)',
-          'rgba(255, 220, 230, 0.9)',
-          'rgba(255, 182, 193, 0.88)',
-          'rgba(255, 130, 165, 0.82)',
-          'rgba(244, 63, 110, 0.78)'
+          'rgba(255, 220, 235, 0.9)',
+          'rgba(255, 182, 198, 0.92)',
+          'rgba(255, 120, 160, 0.88)',
+          'rgba(244, 63, 110, 0.85)'
         ];
         this.color = shades[Math.floor(Math.random() * shades.length)];
       }
@@ -1176,10 +1301,10 @@
         this.swayAngle += this.swaySpeed;
         this.flip += this.flipSpeed;
         this.angle += this.angularSpeed;
-        this.x += this.speedX + Math.sin(this.swayAngle) * 0.8;
+        this.x += this.speedX + Math.sin(this.swayAngle) * 0.9;
         this.y += this.speedY;
         if (this.y > h + 25 || this.x > w + 30) {
-          this.reset(Math.random() < 0.35);
+          this.reset(Math.random() < 0.4);
         }
       }
       draw() {
@@ -1200,7 +1325,7 @@
     }
 
     const petals = [];
-    for (let i = 0; i < 50; i++) petals.push(new Petal(i % 2 === 0));
+    for (let i = 0; i < 70; i++) petals.push(new Petal(i % 2 === 0));
 
     function anim() {
       ctx.clearRect(0, 0, w, h);
@@ -1214,15 +1339,15 @@
 
     function triggerWindBurst() {
       playChime();
-      showToast('🌸 Gió xuân thổi qua, cánh hoa bừng nở!');
-      for (let i = 0; i < 25; i++) {
+      showToast('🌸 Mưa hoa anh đào bừng nở rợp trời!');
+      for (let i = 0; i < 35; i++) {
         const p = new Petal(true);
-        p.speedX = Math.random() * 5 + 3;
-        p.speedY = Math.random() * 2.5 + 1;
+        p.speedX = Math.random() * 5.5 + 3.5;
+        p.speedY = Math.random() * 2.8 + 1.2;
         petals.push(p);
       }
       setTimeout(() => {
-        while (petals.length > 50) petals.pop();
+        while (petals.length > 70) petals.pop();
       }, 5000);
     }
 
