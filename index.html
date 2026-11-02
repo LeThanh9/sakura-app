@@ -43,111 +43,68 @@
 
   <style>
     /* ==========================================================
-       ULTRA-TRANSLUCENT LIQUID GLASS SYSTEM (CHỦ ĐỀ SAKURA)
-       Nền phong cảnh Nhật Bản xuyên thấu qua lớp kính lỏng
+       CRYSTAL LIQUID GLASS SYSTEM (CHUẨN DUSCU FLASHER)
+       Kính lỏng trong suốt để nhìn thấu 100% hình nền phong cảnh
        ========================================================== */
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: #1a0812;
-      background: #2b111c url('bg-pagoda.jpg') no-repeat center center fixed;
-      background-size: cover;
-      transition: background-image 0.5s ease-in-out;
+      color: #0f172a;
+      background: #0f172a;
       min-height: 100vh;
     }
 
-    /* Lớp phủ ánh sáng mặt trời & sắc hồng lan tỏa xuyên thấu */
-    .caustic-ambient-layer {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      background: 
-        radial-gradient(circle at 75% 15%, rgba(255, 240, 245, 0.4) 0%, rgba(255, 182, 193, 0.2) 35%, transparent 65%),
-        linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 192, 203, 0.06) 50%, rgba(43, 17, 28, 0.35) 100%);
-    }
-
-    /* Các đốm sáng Bokeh bồng bềnh */
-    .bokeh-orb {
-      position: fixed;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 2;
-      filter: blur(50px);
-      animation: floatBokeh 14s ease-in-out infinite alternate;
-    }
-    .bokeh-1 {
-      width: 360px;
-      height: 360px;
-      background: rgba(255, 182, 193, 0.35);
-      top: 5%;
-      right: 12%;
-    }
-    .bokeh-2 {
-      width: 420px;
-      height: 420px;
-      background: rgba(244, 63, 110, 0.22);
-      bottom: -10%;
-      left: 5%;
-      animation-delay: -7s;
-    }
-
-    @keyframes floatBokeh {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(35px, 25px) scale(1.12); }
-    }
-
-    /* Khung nền lớn bên ngoài: Siêu trong suốt kính lỏng */
+    /* Khung nền lớn bên ngoài: Siêu trong suốt (Chỉ 15-20% độ mờ) */
     .liquid-shell {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.15) 100%);
-      backdrop-filter: blur(22px) saturate(185%);
-      -webkit-backdrop-filter: blur(22px) saturate(185%);
-      border: 1px solid rgba(255, 255, 255, 0.75);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%);
+      backdrop-filter: blur(14px) saturate(170%);
+      -webkit-backdrop-filter: blur(14px) saturate(170%);
+      border: 1px solid rgba(255, 255, 255, 0.65);
       box-shadow:
-        0 20px 50px rgba(15, 5, 10, 0.15),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.95),
-        inset 0 -1px 1.5px rgba(255, 255, 255, 0.35);
+        0 20px 50px rgba(0, 0, 0, 0.25),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.9),
+        inset 0 -1px 1.5px rgba(255, 255, 255, 0.25);
     }
 
-    /* Các thẻ chức năng: Kính mờ xuyên thấu */
+    /* Các thẻ chức năng: Kính mờ xuyên thấu vừa phải */
     .liquid-card {
-      background: linear-gradient(155deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.25) 100%);
-      backdrop-filter: blur(28px) saturate(195%);
-      -webkit-backdrop-filter: blur(28px) saturate(195%);
-      border: 1px solid rgba(255, 255, 255, 0.85);
+      background: linear-gradient(155deg, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.16) 100%);
+      backdrop-filter: blur(20px) saturate(190%);
+      -webkit-backdrop-filter: blur(20px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.72);
       border-radius: 24px;
       box-shadow:
-        0 10px 28px -6px rgba(15, 5, 10, 0.1),
-        0 2px 6px rgba(15, 5, 10, 0.04),
-        inset 0 1.5px 1px rgba(255, 255, 255, 0.95),
-        inset 0 -1px 1px rgba(255, 255, 255, 0.45);
+        0 10px 28px -6px rgba(0, 0, 0, 0.15),
+        0 2px 6px rgba(0, 0, 0, 0.06),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.92),
+        inset 0 -1px 1px rgba(255, 255, 255, 0.35);
       transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     /* Thẻ con bên trong */
     .liquid-subcard {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0.22) 100%);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.75);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.18) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.68);
       transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .liquid-subcard:hover {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.45) 100%);
-      border-color: rgba(255, 255, 255, 1);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.38) 100%);
+      border-color: rgba(255, 255, 255, 0.95);
       transform: translateY(-1.5px);
-      box-shadow: 0 10px 26px rgba(244, 63, 110, 0.16);
+      box-shadow: 0 10px 24px rgba(244, 63, 110, 0.2);
     }
 
     /* Thẻ khi đang được chọn (Active) */
     .liquid-card-active {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 228, 234, 0.58) 100%);
-      backdrop-filter: blur(28px) saturate(200%);
-      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 228, 234, 0.5) 100%);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
       border: 1.5px solid rgba(255, 255, 255, 1);
       box-shadow:
-        0 14px 32px -6px rgba(225, 29, 90, 0.3),
-        0 4px 12px rgba(244, 63, 110, 0.16),
+        0 14px 32px -6px rgba(225, 29, 90, 0.35),
+        0 4px 12px rgba(244, 63, 110, 0.2),
         inset 0 2px 2px rgba(255, 255, 255, 1),
         0 0 0 2px rgba(244, 63, 110, 0.35);
       transform: translateY(-1px);
@@ -155,26 +112,26 @@
 
     /* Nút bấm kính lỏng (Tactile Pill Button) */
     .liquid-btn {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.45) 100%);
-      backdrop-filter: blur(22px) saturate(190%);
-      -webkit-backdrop-filter: blur(22px) saturate(190%);
-      border: 1px solid rgba(255, 255, 255, 0.9);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.38) 100%);
+      backdrop-filter: blur(20px) saturate(190%);
+      -webkit-backdrop-filter: blur(20px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.85);
       border-radius: 9999px;
-      color: #3b1424;
+      color: #0f172a;
       font-weight: 700;
       box-shadow:
-        0 6px 16px -3px rgba(15, 5, 10, 0.1),
-        0 2px 4px rgba(15, 5, 10, 0.05),
+        0 6px 16px -3px rgba(0, 0, 0, 0.12),
+        0 2px 4px rgba(0, 0, 0, 0.06),
         inset 0 1.5px 0.5px rgba(255, 255, 255, 1),
-        inset 0 -1px 1px rgba(255, 255, 255, 0.5);
+        inset 0 -1px 1px rgba(255, 255, 255, 0.4);
       transition: all 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .liquid-btn:hover:not(:disabled) {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.65) 100%);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.6) 100%);
       transform: translateY(-1.5px);
       box-shadow:
-        0 10px 22px -4px rgba(225, 29, 90, 0.2),
+        0 10px 22px -4px rgba(225, 29, 90, 0.25),
         inset 0 2px 1px rgba(255, 255, 255, 1);
     }
 
@@ -187,7 +144,7 @@
       background: linear-gradient(180deg, rgba(244, 63, 110, 0.92) 0%, rgba(225, 29, 90, 0.88) 100%);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.8);
       border-radius: 9999px;
       color: #ffffff;
       font-weight: 800;
@@ -209,14 +166,14 @@
 
     /* Ô chọn / Input kính mờ */
     .liquid-input {
-      background: rgba(255, 255, 255, 0.52);
+      background: rgba(255, 255, 255, 0.45);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.85);
       border-radius: 16px;
-      color: #2b111c;
+      color: #0f172a;
       box-shadow:
-        inset 0 2px 4px rgba(15, 5, 10, 0.05),
+        inset 0 2px 4px rgba(0, 0, 0, 0.05),
         0 1px 2px rgba(255, 255, 255, 0.85);
       transition: all 0.2s ease;
     }
@@ -226,18 +183,18 @@
       border-color: rgba(244, 63, 110, 0.75);
       box-shadow:
         0 0 0 3px rgba(244, 63, 110, 0.2),
-        inset 0 1px 2px rgba(15, 5, 10, 0.03);
+        inset 0 1px 2px rgba(0, 0, 0, 0.03);
     }
 
     /* Viên thuốc kính trượt mượt dưới thanh Tab (Sliding Glass Pill) */
     .sliding-glass-pill {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.8) 100%);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.75) 100%);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 1);
       box-shadow:
         0 4px 14px rgba(225, 29, 90, 0.2),
-        0 1px 3px rgba(15, 5, 10, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.08),
         inset 0 1.5px 1px rgba(255, 255, 255, 1);
       transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
     }
@@ -261,11 +218,11 @@
       will-change: transform, opacity, filter;
     }
 
-    /* Thanh cuộn tinh tế */
+    /* Thanh cuộn */
     .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(225, 29, 90, 0.28);
+      background: rgba(225, 29, 90, 0.3);
       border-radius: 9999px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
@@ -284,15 +241,24 @@
     }
   </style>
 </head>
-<body class="m-0 p-0 h-screen overflow-hidden flex flex-col select-none relative" id="body-bg">
+<body class="m-0 p-0 h-screen overflow-hidden flex flex-col select-none relative">
+
+  <!-- =========================================================================
+       THỰC THỂ HÌNH NỀN 4K (DÙNG THẺ IMG ĐẢM BẢO HIỂN THỊ RÕ 100%)
+       ========================================================================= -->
+  <img 
+    id="main-bg-img" 
+    src="bg-pagoda.jpg" 
+    alt="Sakura Landscape" 
+    class="fixed inset-0 w-full h-full object-cover pointer-events-none z-0 transition-opacity duration-700 ease-in-out" 
+  />
+
+  <!-- Lớp phủ ánh sáng tinh tế (Đủ tối nhẹ để chữ nổi bật, nhưng vẫn nhìn rõ cảnh 4K) -->
+  <div class="fixed inset-0 bg-slate-950/25 pointer-events-none z-1"></div>
+  <div class="fixed inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-slate-900/35 pointer-events-none z-1"></div>
 
   <!-- Sakura Falling Petals Canvas -->
   <canvas id="sakura-canvas"></canvas>
-
-  <!-- Ambient Light Sun & Caustic Bloom -->
-  <div class="caustic-ambient-layer"></div>
-  <div class="bokeh-orb bokeh-1"></div>
-  <div class="bokeh-orb bokeh-2"></div>
 
   <!-- =========================================================================
        MAIN DESKTOP FLASHER / UPLOADER WORKSPACE
@@ -303,17 +269,17 @@
     <header class="liquid-shell rounded-full px-4 py-2.5 flex items-center justify-between shrink-0 z-20">
       <div class="flex items-center gap-3">
         <!-- Logo Spinner -->
-        <div class="w-10 h-10 rounded-full bg-white/60 border border-white/90 shadow-sm flex items-center justify-center overflow-hidden p-0.5 text-sakura-600 text-lg">
+        <div class="w-10 h-10 rounded-full bg-white/70 border border-white/90 shadow-sm flex items-center justify-center overflow-hidden p-0.5 text-sakura-600 text-lg">
           <i class="fa-solid fa-fan animate-spin" style="animation-duration: 12s;"></i>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 flex items-center gap-2">
+            <h1 class="text-sm sm:text-base font-extrabold tracking-tight text-slate-900 flex items-center gap-2 drop-shadow-sm">
               Sakura Cloud
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sakura-500/25 text-sakura-800 border border-sakura-400/50">v3.3</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sakura-500/25 text-sakura-800 border border-sakura-400/50">v3.4 4K</span>
             </h1>
           </div>
-          <p class="text-[11px] text-slate-800 font-medium hidden sm:block">
+          <p class="text-[11px] text-slate-800 font-semibold hidden sm:block drop-shadow-sm">
             Nền tảng Tải & Chia Sẻ Ứng Dụng Công Khai • APK • EXE • ZIP • IPA
           </p>
         </div>
@@ -324,8 +290,8 @@
         <!-- NÚT ĐỔI HÌNH NỀN SAKURA (Y HỆT NÚT NỀN DUSCU) -->
         <button 
           id="btn-switch-wallpaper"
-          title="Bấm để đổi hình nền phong cảnh hoa anh đào khác nhau"
-          class="liquid-btn px-3.5 py-1.5 text-xs flex items-center gap-1.5 text-sakura-800 font-bold">
+          title="Bấm để đổi giữa các hình nền hoa anh đào khác nhau"
+          class="liquid-btn px-3.5 py-1.5 text-xs flex items-center gap-1.5 text-sakura-800 font-extrabold">
           <i class="fa-solid fa-image text-sakura-600"></i>
           <span class="hidden md:inline" id="wallpaper-label">Nền: Tháp Cổ Sakura</span>
         </button>
@@ -374,24 +340,24 @@
         <!-- THẺ 1: TRẠNG THÁI MÁY CHỦ & CLOUD STORAGE -->
         <div class="liquid-card p-3.5 space-y-2.5">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-800 flex items-center gap-2">
+            <span class="text-xs font-bold text-slate-900 flex items-center gap-2">
               <span class="w-6 h-6 rounded-full bg-sakura-500/20 text-sakura-700 flex items-center justify-center text-[11px]">
                 <i class="fa-solid fa-cloud"></i>
               </span>
               Kho Lưu Trữ Công Khai
             </span>
-            <span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full border bg-emerald-500/20 text-emerald-800 border-emerald-400/60 flex items-center gap-1">
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border bg-emerald-500/20 text-emerald-800 border-emerald-400/60 flex items-center gap-1">
               <i class="fa-solid fa-circle-check text-[10px]"></i>
               GitHub Pages Ready
             </span>
           </div>
 
-          <div class="flex items-center justify-between text-xs text-slate-800 bg-white/45 p-2.5 rounded-xl border border-white/80">
+          <div class="flex items-center justify-between text-xs text-slate-900 bg-white/55 p-2.5 rounded-xl border border-white/90">
             <div class="flex items-center gap-2">
               <i class="fa-solid fa-link text-sakura-600"></i>
-              <span class="font-mono text-[11px] truncate max-w-[240px]">lethanh9.github.io/sakura-app</span>
+              <span class="font-mono text-[11px] font-bold truncate max-w-[240px]">lethanh9.github.io/sakura-app</span>
             </div>
-            <button id="btn-copy-url" class="liquid-btn px-2.5 py-1 text-[11px] text-slate-800 font-bold hover:text-sakura-700">
+            <button id="btn-copy-url" class="liquid-btn px-2.5 py-1 text-[11px] text-slate-900 font-extrabold hover:text-sakura-700">
               <i class="fa-regular fa-copy"></i> Copy
             </button>
           </div>
@@ -400,13 +366,13 @@
         <!-- THẺ 2: ỨNG DỤNG NỔI BẬT (HERO FLAGSHIP CARD) -->
         <div class="liquid-card p-3.5 space-y-3">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-800 flex items-center gap-2">
+            <span class="text-xs font-bold text-slate-900 flex items-center gap-2">
               <span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-700 flex items-center justify-center text-[11px]">
                 <i class="fa-solid fa-crown"></i>
               </span>
               Ứng Dụng Tiêu Biểu (Featured)
             </span>
-            <span class="text-[11px] font-semibold text-slate-700 bg-white/45 px-2.5 py-0.5 rounded-full border border-white/80">
+            <span class="text-[11px] font-bold text-slate-800 bg-white/50 px-2.5 py-0.5 rounded-full border border-white/80">
               Top 1 Tải Nhiều
             </span>
           </div>
@@ -420,19 +386,19 @@
                 </div>
                 <div class="min-w-0">
                   <div class="flex items-center gap-1.5 flex-wrap">
-                    <span class="text-xs font-extrabold text-slate-900 truncate">
-                      SakuraStream Pro v3.3
+                    <span class="text-xs font-extrabold text-slate-950 truncate">
+                      SakuraStream Pro v3.4
                     </span>
                     <span class="text-[10px] font-bold bg-rose-500/20 text-rose-800 px-2 py-0.5 rounded-full">
                       Mới Nhất
                     </span>
                   </div>
-                  <p class="text-[11px] text-slate-700 truncate">Android APK • Xem anime & đọc truyện tốc độ cao</p>
+                  <p class="text-[11px] text-slate-800 font-medium truncate">Android APK • Xem anime & đọc truyện tốc độ cao</p>
                 </div>
               </div>
 
               <div class="text-right shrink-0">
-                <button onclick="triggerDownloadApp('SakuraStream Pro v3.3.apk')" class="text-[11px] font-bold px-3 py-1 rounded-full inline-block bg-sakura-600 text-white shadow-sm hover:bg-sakura-700 transition-colors">
+                <button onclick="triggerDownloadApp('SakuraStream Pro v3.4.apk')" class="text-[11px] font-extrabold px-3 py-1 rounded-full inline-block bg-sakura-600 text-white shadow-sm hover:bg-sakura-700 transition-colors">
                   Tải Ngay
                 </button>
               </div>
@@ -443,13 +409,13 @@
         <!-- THẺ 3: TẢI TỆP LÊN TỪ MÁY TÍNH (DRAG & DROP BINARY / APP) -->
         <div class="liquid-card p-3.5 space-y-2.5">
           <div class="flex items-center justify-between text-xs">
-            <span class="font-bold text-slate-800 flex items-center gap-2">
+            <span class="font-bold text-slate-900 flex items-center gap-2">
               <span class="w-6 h-6 rounded-full bg-sky-500/20 text-sky-700 flex items-center justify-center text-[11px]">
                 <i class="fa-solid fa-file-arrow-up"></i>
               </span>
               Tải Lên File Ứng Dụng Mới
             </span>
-            <div class="flex items-center gap-1.5 text-slate-700 font-mono text-[11px]">
+            <div class="flex items-center gap-1.5 text-slate-800 font-mono text-[11px]">
               <span>Phiên bản:</span>
               <input 
                 type="text" 
@@ -461,42 +427,42 @@
           </div>
 
           <!-- Drag and drop zone -->
-          <label id="upload-drop-zone" class="border-2 border-dashed border-white/90 hover:border-sakura-400 rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all bg-white/35 hover:bg-white/55">
+          <label id="upload-drop-zone" class="border-2 border-dashed border-white/90 hover:border-sakura-400 rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all bg-white/40 hover:bg-white/60">
             <input 
               type="file" 
               id="file-input-control" 
               accept=".apk,.exe,.zip,.rar,.ipa,.bin" 
               class="hidden" 
             />
-            <div id="file-empty-prompt" class="text-center text-slate-700 text-xs font-medium py-1">
-              <div class="w-10 h-10 rounded-full bg-sakura-500/20 text-sakura-600 flex items-center justify-center mx-auto mb-2 text-lg">
+            <div id="file-empty-prompt" class="text-center text-slate-800 text-xs font-medium py-1">
+              <div class="w-10 h-10 rounded-full bg-sakura-500/25 text-sakura-700 flex items-center justify-center mx-auto mb-2 text-lg">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
               </div>
-              <p class="font-bold text-slate-900">Chạm hoặc kéo thả file vào đây</p>
-              <p class="text-[11px] text-slate-600 mt-0.5">Hỗ trợ .APK, .EXE, .ZIP, .IPA, .BIN</p>
+              <p class="font-extrabold text-slate-950">Chạm hoặc kéo thả file vào đây</p>
+              <p class="text-[11px] text-slate-700 font-medium mt-0.5">Hỗ trợ .APK, .EXE, .ZIP, .IPA, .BIN</p>
             </div>
 
             <div id="file-loaded-info" class="text-center hidden">
-              <div class="text-xs font-bold text-slate-900 truncate max-w-[300px]" id="selected-file-name">App-name.apk</div>
-              <div class="text-[11px] text-emerald-700 font-semibold mt-0.5" id="selected-file-size">18.5 MB • Đã sẵn sàng xuất bản</div>
+              <div class="text-xs font-extrabold text-slate-950 truncate max-w-[300px]" id="selected-file-name">App-name.apk</div>
+              <div class="text-[11px] text-emerald-800 font-bold mt-0.5" id="selected-file-size">18.5 MB • Đã sẵn sàng xuất bản</div>
             </div>
           </label>
 
           <button 
             id="btn-remove-selected-file" 
-            class="text-[11px] font-semibold text-rose-600 hover:underline text-center w-full hidden">
+            class="text-[11px] font-bold text-rose-600 hover:underline text-center w-full hidden">
             Hủy chọn file này
           </button>
         </div>
 
         <!-- THẺ 4: NÚT THỰC THI NẠP / XUẤT BẢN FILE LÊN CLOUD -->
         <div class="liquid-card p-3.5 space-y-3">
-          <div class="flex items-center justify-between text-xs text-slate-700">
-            <label class="flex items-center gap-2 cursor-pointer font-semibold">
+          <div class="flex items-center justify-between text-xs text-slate-800 font-bold">
+            <label class="flex items-center gap-2 cursor-pointer font-bold">
               <input type="checkbox" id="check-auto-publish" checked class="w-4 h-4 accent-sakura-600 rounded">
               <span>Tạo link công khai ngay lập tức</span>
             </label>
-            <span class="text-[10px] text-slate-500 font-mono">SHA-256</span>
+            <span class="text-[10px] text-slate-700 font-mono">SHA-256</span>
           </div>
 
           <button 
@@ -522,7 +488,7 @@
         <!-- Thanh Tab Pill Bo Tròn có hiệu ứng Trượt Kính (Sliding Glass Pill) -->
         <div class="flex items-center justify-between px-4 py-3 border-b border-white/50 bg-white/20 shrink-0 flex-wrap gap-2">
           
-          <div id="tab-nav-container" class="relative flex items-center gap-1 bg-white/35 p-1 rounded-full border border-white/75">
+          <div id="tab-nav-container" class="relative flex items-center gap-1 bg-white/40 p-1 rounded-full border border-white/80">
             <!-- Viên thuốc kính trượt tự động (Sliding Glass Pill) -->
             <div 
               id="sliding-pill-indicator" 
@@ -561,9 +527,9 @@
 
           <!-- Các nút điều khiển phụ bên phải -->
           <div class="flex items-center gap-2">
-            <div class="flex items-center gap-1 bg-white/40 px-2.5 py-1 rounded-full border border-white/80 text-xs text-slate-800 font-semibold">
+            <div class="flex items-center gap-1 bg-white/50 px-2.5 py-1 rounded-full border border-white/80 text-xs text-slate-900 font-bold">
               <i class="fa-solid fa-filter text-sakura-600 text-[10px]"></i>
-              <select id="filter-category" onchange="filterCategory(this.value)" class="bg-transparent font-semibold outline-none cursor-pointer text-xs">
+              <select id="filter-category" onchange="filterCategory(this.value)" class="bg-transparent font-bold outline-none cursor-pointer text-xs">
                 <option value="all">Tất cả định dạng</option>
                 <option value="android">Android (.apk)</option>
                 <option value="windows">Windows (.exe)</option>
@@ -574,7 +540,7 @@
             <button 
               onclick="clearConsoleLog()" 
               title="Xóa nhật ký" 
-              class="liquid-btn px-3 py-1 text-xs text-slate-700 hover:text-rose-600">
+              class="liquid-btn px-3 py-1 text-xs text-slate-800 hover:text-rose-600">
               <i class="fa-solid fa-trash-can"></i>
             </button>
           </div>
@@ -588,11 +554,11 @@
           <!-- TAB 1: KHO ỨNG DỤNG (APP REPOSITORY) -->
           <div id="tab-pane-repo" class="tab-pane-animate space-y-3">
             <div class="flex items-center justify-between pb-1">
-              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-800 flex items-center gap-2">
+              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-900 flex items-center gap-2 drop-shadow-sm">
                 <i class="fa-solid fa-layer-group text-sakura-600"></i>
                 Danh sách File & Ứng Dụng Đã Xuất Bản
               </h3>
-              <span class="text-[11px] text-slate-700 font-medium">Bấm vào nút để tải file trực tiếp hoặc nhận QR</span>
+              <span class="text-[11px] text-slate-800 font-bold">Bấm vào nút để tải file trực tiếp hoặc nhận QR</span>
             </div>
 
             <div id="app-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -606,22 +572,22 @@
                     <div>
                       <div class="flex items-center gap-2">
                         <h4 class="text-sm font-extrabold text-slate-900 group-hover:text-sakura-700 transition-colors">SakuraStream Pro</h4>
-                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-800 border border-emerald-400/50">v3.3</span>
+                        <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-800 border border-emerald-400/50">v3.4</span>
                       </div>
-                      <p class="text-[11px] text-slate-700 mt-0.5 font-medium">Ứng dụng xem Anime & tin tức hoa anh đào mượt mà</p>
+                      <p class="text-[11px] text-slate-800 mt-0.5 font-medium">Ứng dụng xem Anime & tin tức hoa anh đào mượt mà</p>
                     </div>
                   </div>
                 </div>
 
-                <div class="flex items-center justify-between pt-2 border-t border-white/60 text-[11px] text-slate-700">
-                  <span class="flex items-center gap-1 font-mono font-semibold">
-                    <i class="fa-solid fa-hard-drive text-slate-500"></i> 24.5 MB • 430 lượt tải
+                <div class="flex items-center justify-between pt-2 border-t border-white/60 text-[11px] text-slate-800">
+                  <span class="flex items-center gap-1 font-mono font-bold">
+                    <i class="fa-solid fa-hard-drive text-slate-600"></i> 24.5 MB • 430 lượt tải
                   </span>
                   <div class="flex items-center gap-1.5">
-                    <button onclick="showQrModal('SakuraStream Pro v3.3.apk')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-700" title="Mã QR tải nhanh">
+                    <button onclick="showQrModal('SakuraStream Pro v3.4.apk')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-800" title="Mã QR tải nhanh">
                       <i class="fa-solid fa-qrcode"></i>
                     </button>
-                    <button onclick="triggerDownloadApp('SakuraStream Pro v3.3.apk')" class="liquid-btn px-3 py-1 text-[11px] font-bold text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
+                    <button onclick="triggerDownloadApp('SakuraStream Pro v3.4.apk')" class="liquid-btn px-3 py-1 text-[11px] font-extrabold text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
                       <i class="fa-solid fa-download"></i> Tải Về
                     </button>
                   </div>
@@ -640,20 +606,20 @@
                         <h4 class="text-sm font-extrabold text-slate-900 group-hover:text-sakura-700 transition-colors">DesktopHelper-Setup</h4>
                         <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-800 border border-sky-400/50">v2.1</span>
                       </div>
-                      <p class="text-[11px] text-slate-700 mt-0.5 font-medium">Công cụ quản lý máy tính & hình nền động Sakura</p>
+                      <p class="text-[11px] text-slate-800 mt-0.5 font-medium">Công cụ quản lý máy tính & hình nền động Sakura</p>
                     </div>
                   </div>
                 </div>
 
-                <div class="flex items-center justify-between pt-2 border-t border-white/60 text-[11px] text-slate-700">
-                  <span class="flex items-center gap-1 font-mono font-semibold">
-                    <i class="fa-solid fa-hard-drive text-slate-500"></i> 48.2 MB • 215 lượt tải
+                <div class="flex items-center justify-between pt-2 border-t border-white/60 text-[11px] text-slate-800">
+                  <span class="flex items-center gap-1 font-mono font-bold">
+                    <i class="fa-solid fa-hard-drive text-slate-600"></i> 48.2 MB • 215 lượt tải
                   </span>
                   <div class="flex items-center gap-1.5">
-                    <button onclick="showQrModal('DesktopHelper-Setup.exe')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-700" title="Mã QR tải nhanh">
+                    <button onclick="showQrModal('DesktopHelper-Setup.exe')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-800" title="Mã QR tải nhanh">
                       <i class="fa-solid fa-qrcode"></i>
                     </button>
-                    <button onclick="triggerDownloadApp('DesktopHelper-Setup.exe')" class="liquid-btn px-3 py-1 text-[11px] font-bold text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
+                    <button onclick="triggerDownloadApp('DesktopHelper-Setup.exe')" class="liquid-btn px-3 py-1 text-[11px] font-extrabold text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
                       <i class="fa-solid fa-download"></i> Tải Về
                     </button>
                   </div>
@@ -672,20 +638,20 @@
                         <h4 class="text-sm font-extrabold text-slate-900 group-hover:text-sakura-700 transition-colors">Sakura-4K-Wallpaper-Pack</h4>
                         <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-800 border border-amber-400/50">ZIP</span>
                       </div>
-                      <p class="text-[11px] text-slate-700 mt-0.5 font-medium">Bộ sưu tập 50 hình nền hoa anh đào Nhật Bản 4K siêu nét</p>
+                      <p class="text-[11px] text-slate-800 mt-0.5 font-medium">Bộ sưu tập 50 hình nền hoa anh đào Nhật Bản 4K siêu nét</p>
                     </div>
                   </div>
                 </div>
 
-                <div class="flex items-center justify-between pt-2 border-t border-white/60 text-[11px] text-slate-700">
-                  <span class="flex items-center gap-1 font-mono font-semibold">
-                    <i class="fa-solid fa-hard-drive text-slate-500"></i> 128 MB • 690 lượt tải
+                <div class="flex items-center justify-between pt-2 border-t border-white/60 text-[11px] text-slate-800">
+                  <span class="flex items-center gap-1 font-mono font-bold">
+                    <i class="fa-solid fa-hard-drive text-slate-600"></i> 128 MB • 690 lượt tải
                   </span>
                   <div class="flex items-center gap-1.5">
-                    <button onclick="showQrModal('Sakura-4K-Wallpaper-Pack.zip')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-700" title="Mã QR tải nhanh">
+                    <button onclick="showQrModal('Sakura-4K-Wallpaper-Pack.zip')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-800" title="Mã QR tải nhanh">
                       <i class="fa-solid fa-qrcode"></i>
                     </button>
-                    <button onclick="triggerDownloadApp('Sakura-4K-Wallpaper-Pack.zip')" class="liquid-btn px-3 py-1 text-[11px] font-bold text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
+                    <button onclick="triggerDownloadApp('Sakura-4K-Wallpaper-Pack.zip')" class="liquid-btn px-3 py-1 text-[11px] font-extrabold text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
                       <i class="fa-solid fa-download"></i> Tải Về
                     </button>
                   </div>
@@ -704,20 +670,20 @@
                         <h4 class="text-sm font-extrabold text-slate-900 group-hover:text-sakura-700 transition-colors">ESP32-Sakura-Firmware</h4>
                         <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-800 border border-purple-400/50">BIN</span>
                       </div>
-                      <p class="text-[11px] text-slate-700 mt-0.5 font-medium">Bản dựng Firmware Bruce phần cứng ESP32 / S3</p>
+                      <p class="text-[11px] text-slate-800 mt-0.5 font-medium">Bản dựng Firmware Bruce phần cứng ESP32 / S3</p>
                     </div>
                   </div>
                 </div>
 
-                <div class="flex items-center justify-between pt-2 border-t border-white/60 text-[11px] text-slate-700">
-                  <span class="flex items-center gap-1 font-mono font-semibold">
-                    <i class="fa-solid fa-hard-drive text-slate-500"></i> 4.12 MB • 320 lượt tải
+                <div class="flex items-center justify-between pt-2 border-t border-white/60 text-[11px] text-slate-800">
+                  <span class="flex items-center gap-1 font-mono font-bold">
+                    <i class="fa-solid fa-hard-drive text-slate-600"></i> 4.12 MB • 320 lượt tải
                   </span>
                   <div class="flex items-center gap-1.5">
-                    <button onclick="showQrModal('ESP32-Sakura-Firmware.bin')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-700" title="Mã QR tải nhanh">
+                    <button onclick="showQrModal('ESP32-Sakura-Firmware.bin')" class="liquid-btn px-2.5 py-1 text-[11px] font-bold text-slate-800" title="Mã QR tải nhanh">
                       <i class="fa-solid fa-qrcode"></i>
                     </button>
-                    <button onclick="triggerDownloadApp('ESP32-Sakura-Firmware.bin')" class="liquid-btn px-3 py-1 text-[11px] font-bold text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
+                    <button onclick="triggerDownloadApp('ESP32-Sakura-Firmware.bin')" class="liquid-btn px-3 py-1 text-[11px] font-extrabold text-sakura-700 hover:text-sakura-800 flex items-center gap-1">
                       <i class="fa-solid fa-download"></i> Tải Về
                     </button>
                   </div>
@@ -729,21 +695,21 @@
           <!-- TAB 2: NHẬT KÝ HỆ THỐNG (TERMINAL CONSOLE LOG) -->
           <div id="tab-pane-logs" class="tab-pane-animate hidden space-y-3">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-800 flex items-center gap-2">
+              <span class="text-xs font-bold text-slate-900 flex items-center gap-2">
                 <i class="fa-solid fa-terminal text-sakura-600"></i>
                 Nhật Ký Quản Lý Tải Lên & Kết Nối Cloud
               </span>
-              <span class="text-[11px] font-mono text-emerald-700 bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-400/50">
+              <span class="text-[11px] font-mono text-emerald-800 bg-emerald-500/25 px-2 py-0.5 rounded-full border border-emerald-400/60 font-bold">
                 Live Status: 200 OK
               </span>
             </div>
 
             <div class="bg-slate-950/85 backdrop-blur-xl border border-white/30 rounded-2xl p-4 font-mono text-xs text-slate-200 h-[480px] overflow-y-auto custom-scrollbar space-y-1.5 shadow-inner" id="console-output">
-              <div class="text-slate-500">// Sakura Cloud File Storage v3.3 (C) 2026 LeThanh9</div>
+              <div class="text-slate-500">// Sakura Cloud File Storage v3.4 4K (C) 2026 LeThanh9</div>
               <div class="text-emerald-400">[INIT] Hệ thống lưu trữ đám mây hoa anh đào sẵn sàng hoạt động.</div>
               <div class="text-sky-300">[HOST] Tên miền công khai: https://lethanh9.github.io/sakura-app/</div>
               <div class="text-slate-300">[READY] Đã nạp danh sách 4 ứng dụng mặc định vào bộ nhớ.</div>
-              <div class="text-sakura-400">[SPRING] Đã kích hoạt hình nền hoa anh đào Nhật Bản 4K siêu nét.</div>
+              <div class="text-sakura-400">[SPRING] Đã kích hoạt hình nền hoa anh đào Nhật Bản 4K siêu nét (Ảnh thực tế 100%).</div>
             </div>
           </div>
 
@@ -754,7 +720,7 @@
                 <i class="fa-brands fa-android text-emerald-600 text-lg"></i>
                 Hướng Dẫn Cài Đặt File .APK Trên Điện Thoại Android
               </h3>
-              <ol class="list-decimal list-inside text-xs text-slate-700 space-y-1.5 leading-relaxed pl-1">
+              <ol class="list-decimal list-inside text-xs text-slate-800 space-y-1.5 leading-relaxed pl-1 font-medium">
                 <li>Bấm nút <strong>Tải Về</strong> trực tiếp trên trình duyệt Chrome/Cốc Cốc của điện thoại.</li>
                 <li>Sau khi tải xong, nhấn mở file <code>.apk</code> từ thanh thông báo hoặc thư mục <em>Download</em>.</li>
                 <li>Nếu điện thoại hiện cảnh báo <em>"Cài đặt ứng dụng không rõ nguồn gốc"</em>, chọn <strong>Cài đặt</strong> ➔ Bật công tắc <strong>Cho phép từ nguồn này</strong>.</li>
@@ -767,7 +733,7 @@
                 <i class="fa-brands fa-windows text-blue-600 text-lg"></i>
                 Hướng Dẫn Mở File .EXE Trên Máy Tính Windows
               </h3>
-              <ol class="list-decimal list-inside text-xs text-slate-700 space-y-1.5 leading-relaxed pl-1">
+              <ol class="list-decimal list-inside text-xs text-slate-800 space-y-1.5 leading-relaxed pl-1 font-medium">
                 <li>Bấm <strong>Tải Về</strong> file cài đặt <code>.exe</code>.</li>
                 <li>Nếu màn hình hiển thị <em>"Windows protected your PC" (SmartScreen)</em>, hãy bấm vào dòng chữ <strong>More info</strong>.</li>
                 <li>Chọn <strong>Run anyway (Vẫn chạy)</strong> để hoàn tất tiến trình cài đặt.</li>
@@ -791,7 +757,7 @@
       </div>
       <div>
         <h4 class="text-base font-extrabold text-slate-900" id="qr-modal-title">Quét Mã Để Tải Về</h4>
-        <p class="text-xs text-slate-600 mt-1">Dùng camera điện thoại hoặc Zalo để quét mã tải trực tiếp</p>
+        <p class="text-xs text-slate-700 mt-1">Dùng camera điện thoại hoặc Zalo để quét mã tải trực tiếp</p>
       </div>
 
       <div class="bg-white p-3 rounded-2xl border border-white/80 shadow-md inline-block mx-auto">
@@ -864,7 +830,7 @@
       if (currentBtn) updateSlidingPill(currentBtn);
     });
 
-    // 2. WALLPAPER SWITCHER (THAY ĐỔI HÌNH NỀN PHONG CẢNH SAKURA)
+    // 2. WALLPAPER SWITCHER (THAY ĐỔI HÌNH NỀN PHONG CẢNH SAKURA QUA THẺ IMG)
     const wallpapers = [
       { name: 'Nền: Tháp Cổ Sakura', file: 'bg-pagoda.jpg' },
       { name: 'Nền: Vườn Đào Kyoto', file: 'bg-kyoto.jpg' },
@@ -872,16 +838,20 @@
     ];
     let currentWpIndex = 0;
 
-    const bodyBg = document.getElementById('body-bg');
+    const bgImgEl = document.getElementById('main-bg-img');
     const wpLabel = document.getElementById('wallpaper-label');
     const btnSwitchWp = document.getElementById('btn-switch-wallpaper');
 
     btnSwitchWp.addEventListener('click', () => {
       currentWpIndex = (currentWpIndex + 1) % wallpapers.length;
       const wp = wallpapers[currentWpIndex];
-      bodyBg.style.backgroundImage = `url('${wp.file}')`;
+      bgImgEl.style.opacity = '0';
+      setTimeout(() => {
+        bgImgEl.src = wp.file;
+        bgImgEl.style.opacity = '1';
+      }, 200);
       wpLabel.textContent = wp.name;
-      showToast(`🌸 Đã đổi sang: ${wp.name}`);
+      showToast(`🌸 Đã chuyển sang: ${wp.name}`);
       playChime();
     });
 
